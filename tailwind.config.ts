@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-
+import tailwindcssAnimate from "tailwindcss-animate";
 export default {
     darkMode: ["class"],
     content: [
@@ -9,6 +9,12 @@ export default {
   ],
   theme: {
   	extend: {
+		extend: {
+			container: {
+			  center: true, 
+			  padding: "1rem",
+			},
+		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
@@ -49,7 +55,9 @@ export default {
   				'3': 'hsl(var(--chart-3))',
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
-  			}
+  			},
+			  customBlue: "#00eeff",
+			  customDark: "#1f232e",
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
@@ -58,5 +66,5 @@ export default {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 } satisfies Config;
