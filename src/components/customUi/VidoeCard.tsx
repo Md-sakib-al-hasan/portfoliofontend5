@@ -5,13 +5,16 @@ import { FaPlayCircle } from "react-icons/fa";
 interface VideoCardProps {
   id: string;
   src: string;
+  title:string;
+  description:string;
 }
 
-const VideoCard: React.FC<VideoCardProps> = ({ id, src }) => {
+const VideoCard: React.FC<VideoCardProps> = ({ id, src,title,description }) => {
   if (!id || !src) return null;
 
   return (
-    <div className="relative group w-[300px] h-[160px] overflow-hidden bg-red-400">
+     <div>
+      <div className="relative group w-[300px] h-[160px] overflow-hidden bg-red-400">
       <Image
         src={src}
         width={300}
@@ -25,6 +28,11 @@ const VideoCard: React.FC<VideoCardProps> = ({ id, src }) => {
         </div>
       </Link>
     </div>
+      <div className="py-4">
+      <h2  className="text-2lx font-semibold capitalize ">{title}</h2>
+       <p className="line-clamp-2">{description}</p>
+      </div>
+     </div>
   );
 };
 

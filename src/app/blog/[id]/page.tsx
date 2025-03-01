@@ -1,33 +1,47 @@
 
 
+import CommentSection from '@/components/customUi/ComentSection';
+import CommentsList from '@/components/customUi/commentlist';
 import ShowSinglevioes from '@/components/customUi/ShowSinglevioes';
 import VideoCard from '@/components/customUi/VidoeCard';
 
 
 const Singelvidoes =() => {
   
-    const videosArray = [
-        {
-          "id": "bWhBMNG",
-          "url": "https://i.ibb.co/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png"
-        },
-        {
-          "id": "xYz123A",
-          "url": "https://i.ibb.co/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png"
-        },
-        {
-          "id": "pQr456B",
-          "url": "https://i.ibb.co/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png"
-        },
-        {
-          "id": "LmN789C",
-          "url": "https://i.ibb.co/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png"
-        },
-        {
-          "id": "UvW987D",
-          "url": "https://i.ibb.co/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png"
-        }
-      ];
+   
+  const videosArray = [
+    {
+      "id": "bWhBMNG",
+      "url": "https://i.ibb.co/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png",
+      "title": "Introduction to Next.js",
+      "description": "A quick overview of how to set up and create a Next.js application."
+    },
+    {
+      "id": "xYz123A",
+      "url": "https://i.ibb.co/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png",
+      "title": "Next.js Routing Explained",
+      "description": "Learn about file-based routing in Next.js and how to navigate between pages."
+    },
+    {
+      "id": "pQr456B",
+      "url": "https://i.ibb.co/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png",
+      "title": "Fetching Data in Next.js",
+      "description": "Explore different ways to fetch data in Next.js, including getStaticProps and getServerSideProps."
+    },
+    {
+      "id": "LmN789C",
+      "url": "https://i.ibb.co/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png",
+      "title": "Deploying Next.js Apps",
+      "description": "Step-by-step guide on how to deploy your Next.js app to Vercel and other platforms."
+    },
+    {
+      "id": "UvW987D",
+      "url": "https://i.ibb.co/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png",
+      "title": "Optimizing Performance in Next.js",
+      "description": "Learn best practices for optimizing the performance of your Next.js application."
+    }
+];
+
       
 
 
@@ -51,13 +65,15 @@ const Singelvidoes =() => {
              
              
             {/* righ par  */}
+             <CommentSection/>
+             <CommentsList/>
              
             </div>
             <div className="col-span-1 xl:block hidden ">
                        
             <ul className="space-y-8">
             {
-        videosArray.map(item =>  <li key={item.id}><VideoCard src="https://i.ibb.co/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png" id={item.id}/></li> )
+        videosArray.map(item =>  <li key={item.id}><VideoCard src="https://i.ibb.co/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png" title={item.title} description={item.description} id={item.id}/></li> )
     }
          </ul>
                 

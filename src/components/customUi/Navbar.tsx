@@ -61,7 +61,11 @@ const Navbar = () => {
               </Link>
             </motion.li>
           ))}
-           <Link href="/drashboard"><UserIcon className="text-white"/></Link>
+           <Link href="/drashboard"><UserIcon  className={`text-md font-medium ${
+                  pathname === "/drashboard"
+                    ? " text-red-400 dark:text-[#00eeff] font-bold"
+                    : " dark:text-white text-black"
+                }text-red-400 dark:hover:text-[#00eeff] transition`}/></Link>
            <LightandDarktoggel/>
         </ul>
 
