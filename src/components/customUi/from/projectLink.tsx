@@ -1,9 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import React, { useState } from 'react'
+import React from 'react'
 import { FieldValues, useForm } from 'react-hook-form';
-import SelectOptions, { OptionType } from './Selectopion';
 import { z } from 'zod';
 import toast, { Toaster } from 'react-hot-toast';
+import { TProjectLink } from '@/app/drashboard/addproject/page';
 
 const userSchema = z.object({
   fontendlink: z.string().min(2, "Title must be at least 2 characters").optional(),
@@ -15,7 +15,7 @@ const userSchema = z.object({
 
 
 
-const ProjectLink = ({setdata, projectstatus,setpgecontroller}:{ setpgecontroller:() => void,projectstatus:Boolean,setdata: (data: any) => void  }) => {
+const ProjectLink = ({setdata, projectstatus}:{ projectstatus:boolean,setdata: (data: TProjectLink) => void  }) => {
     
 
     const {register,handleSubmit,formState: { errors },  reset} = useForm({
@@ -23,7 +23,7 @@ const ProjectLink = ({setdata, projectstatus,setpgecontroller}:{ setpgecontrolle
       });
     
       const onSubmit = async (data: FieldValues) => {
-          setdata(data)
+          setdata({backendlink:data?.backendlink,backendsourcelink:data?.bakcendSroueLink,fontendlink:data?.fontendlink,fontendsourcelink:data?.fontendsourcelink})
           toast.success(" upload Rource code  and Live link  successfully");
           reset();
       };
@@ -64,7 +64,7 @@ const ProjectLink = ({setdata, projectstatus,setpgecontroller}:{ setpgecontrolle
       </div>
 
       <div className="w-3/12 mt-5">
-        <button onClick={ setpgecontroller} className="py-2 px-3 bg-red-400 rounded-md"> upload</button>
+        <button  className="py-2 px-3 bg-red-400 rounded-md text-white"> upload</button>
       </div>
     </form>
     </div>

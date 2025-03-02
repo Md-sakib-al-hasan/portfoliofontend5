@@ -52,7 +52,7 @@ export default function AddProduct() {
       }
     }
 
-    console.log({ imgUrl, videoUrl, ...data });
+    console.log({...statusValue, imgUrl, videoUrl, ...data });
   };
 
   return (

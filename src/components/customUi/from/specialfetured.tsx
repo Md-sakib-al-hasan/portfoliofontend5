@@ -1,6 +1,7 @@
+import { TSecialFetural } from '@/app/drashboard/addproject/page';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React, { useState } from 'react';
-import { useForm, useFieldArray } from 'react-hook-form';
+import React from 'react';
+import { useForm, useFieldArray, FieldValues } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
 import { z } from 'zod';
 
@@ -13,7 +14,7 @@ const userSchema = z.object({
   ).min(1, "At least one feature is required"), 
 });
 
-const Specialfetured = ({ setSpecial, title,setpgecontroller }: {setpgecontroller:() => void,title:string ,setSpecial: (data: any) => void }) => {
+const Specialfetured = ({ setSpecial, title, }: {title:string ,setSpecial: (data:TSecialFetural) => void }) => {
   const { register, handleSubmit, control, formState: { errors },  reset } = useForm({
     resolver: zodResolver(userSchema),
     defaultValues: {
@@ -26,8 +27,8 @@ const Specialfetured = ({ setSpecial, title,setpgecontroller }: {setpgecontrolle
     name: "features",
   });
 
-  const onSubmit = (data: any) => {
-    setSpecial(data);
+  const onSubmit = (data:FieldValues) => {
+    setSpecial({features:data?.features});
     toast.success(` upload  ${title} successfully`);
     reset();
   };
@@ -68,7 +69,7 @@ const Specialfetured = ({ setSpecial, title,setpgecontroller }: {setpgecontrolle
         ))}
       </div>
 
-      <button  onClick={setpgecontroller} type="submit" className="bg-red-400 text-white py-2 px-10 mt-4 rounded">uplaod</button>
+      <button   type="submit" className="bg-red-400 text-white py-2 px-10 mt-4 rounded">uplaod</button>
     </form>
   );
 };

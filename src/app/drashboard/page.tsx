@@ -1,5 +1,5 @@
 "use client"
-import { FaBox, FaBoxOpen, FaLaptopCode, FaShoppingCart } from "react-icons/fa";
+import { FaLaptopCode} from "react-icons/fa";
 import { IoMdSearch } from "react-icons/io";
 import Link from "next/link";
 import { MdOutlineAddToQueue } from "react-icons/md";
@@ -50,7 +50,7 @@ const Dashboardpage = () => {
   const [sort,setSort] = useState("-createdAt")
 
   const handleDelete = (id: number | string) => {
-    console.log(id)
+    console.log(id,searchValue,sort)
 } 
    
      

@@ -2,14 +2,11 @@
 
 
 "use client"
-import { FaBox, FaBoxOpen, FaLaptopCode, FaShoppingCart } from "react-icons/fa";
+
 import { IoMdSearch } from "react-icons/io";
-import Link from "next/link";
-import { MdOutlineAddToQueue } from "react-icons/md";
-import { TbStackFront } from "react-icons/tb";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import Image from "next/image";
+
 
 
 const messages = [
@@ -25,10 +22,7 @@ const Dashboardpage = () => {
   const searchValue = watch("search");
   const [sort,setSort] = useState("-createdAt")
 
-  const handleDelete = (id: number | string) => {
-    console.log(id)
-} 
-   
+  console.log(searchValue,sort)
      
   return (
     <div>

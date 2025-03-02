@@ -28,7 +28,7 @@ export const uploadToCloudinary = async (file: File, resourceType: "image" | "vi
 
         // Store response text before parsing
         const responseClone = response.clone(); // Clone response for debugging
-        const responseText = await responseClone.text();
+         await responseClone.text();
         
 
         if (!response.ok) {

@@ -4,6 +4,7 @@ import { FieldValues, useForm } from 'react-hook-form';
 import SelectOptions, { OptionType } from './Selectopion';
 import { z } from 'zod';
 import toast, { Toaster } from 'react-hot-toast';
+import { Tdescriptions } from '@/app/drashboard/addproject/page';
 
 const userSchema = z.object({
   title: z.string().min(2, "Title must be at least 2 characters").optional(),
@@ -17,7 +18,7 @@ const Statusoptions = [
   ];
 
 
-const Descrioform = ({setdata, setprojectstatus,setpgecontroller}:{setpgecontroller:() => void,setdata:(data: any) => void, setprojectstatus: (data: any) => void  }) => {
+const Descrioform = ({setdata, setprojectstatus}:{setdata:(data:Tdescriptions) => void, setprojectstatus: (data:boolean) => void  }) => {
      const [statusValue, setStatusValue] = useState<OptionType | null>(null);
 
     const {register,handleSubmit,formState: { errors },  reset} = useForm({
@@ -25,12 +26,12 @@ const Descrioform = ({setdata, setprojectstatus,setpgecontroller}:{setpgecontrol
       });
     
       const onSubmit = async (data: FieldValues) => {
-        let imgUrl = null;
-        let videoUrl = null;
         setprojectstatus(statusValue?.value ==="frontEnd"? false: true)
-        setdata({ ...data, status:statusValue?.value})
+        if(statusValue?.value){
+        setdata({status:statusValue?.value,description:data?.defaultValues,details:data?.details,title:data?.title})
         toast.success(" upload Descriptins successfully");
         reset();
+        }
        
       };
 
@@ -66,7 +67,7 @@ const Descrioform = ({setdata, setprojectstatus,setpgecontroller}:{setpgecontrol
       </div>
 
       <div className="w-3/12 mt-5">
-        <button  onClick={ setpgecontroller} className="py-2 px-3 bg-red-400 rounded-md"> Upload</button>
+        <button   className="py-2 px-3 bg-red-400 rounded-md text-white"> Upload</button>
       </div>
     </form>
     </div>

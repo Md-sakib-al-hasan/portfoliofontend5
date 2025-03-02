@@ -9,7 +9,7 @@ export type Tchoicefile = {
   videourl: string | null;
 };
 
-const Choicefile = ({ setdata, setpgecontroller }: { setpgecontroller:() => void, setdata: (value: Tchoicefile | null) => void }) => {
+const Choicefile = ({ setdata }: { setdata: (value: Tchoicefile | null) => void }) => {
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -49,7 +49,10 @@ const Choicefile = ({ setdata, setpgecontroller }: { setpgecontroller:() => void
     } else {
       toast.success(" upload video successfully");
       setdata({ imgurl, videourl });
-      event.currentTarget.reset();
+      if (event.currentTarget) {
+        event.currentTarget.reset();
+      }
+    
 
     }
 
@@ -71,7 +74,7 @@ const Choicefile = ({ setdata, setpgecontroller }: { setpgecontroller:() => void
           <input type="file" name="video" className="border text-black border-gray-400 p-2 w-full rounded-md focus:outline-none" />
         </div>
       </div>
-      <button onClick={setpgecontroller} type="submit" className="bg-red-400 py-2 px-10 my-4 rounded-md" disabled={loading}>
+      <button type="submit" className="bg-red-400 py-2 text-white px-10 my-4 rounded-md" disabled={loading}>
         {loading ? "Uploading..." : "upload"}
       </button>
     </form>

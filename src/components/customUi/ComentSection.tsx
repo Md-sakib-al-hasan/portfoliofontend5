@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Card, CardContent } from "@/components/ui/card";
@@ -22,7 +22,7 @@ export default function CommentSection() {
     resolver: zodResolver(commentSchema),
   });
 
-  const onSubmit = (data:any) => {
+  const onSubmit = (data:FieldValues) => {
     setComments([...comments, data.comment]);
     console.log(commentSchema)
     reset();

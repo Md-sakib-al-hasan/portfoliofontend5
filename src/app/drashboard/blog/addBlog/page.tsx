@@ -1,16 +1,12 @@
 "use client"
-import Choicefile, { Tchoicefile } from "@/components/customUi/from/choicefile"
-import { OptionType } from "@/components/customUi/from/Selectopion";
+import Choicefile, { Tchoicefile } from "@/components/customUi/from/choicefile";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { z } from "zod";
 
-const Statusoptions = [
-  { value: "fullStack", label: "Full Stack" },
-  { value: "frontEnd", label: "Front End" },
-];
+
 
 const userSchema = z.object({
   title: z.string().min(2, "Title must be at least 2 characters").optional(),
@@ -19,18 +15,15 @@ const userSchema = z.object({
 });
 
 
-const addblogpage = () => {
-      const [pagecontroller,setpgecontrollers] = useState<number>(1);
+const Addblogpage = () => {
+      
 
-      const [statusValue, setStatusValue] = useState<OptionType | null>(null);
+     
       const [file, setfile] = useState<Tchoicefile | null>(null);
       const {register,handleSubmit,formState: { errors },reset } = useForm({resolver: zodResolver(userSchema),});
 
 
-const handlepgagecontroller = (pgenumber:number) => {
-        setpgecontrollers(pgenumber)
-        
-}
+
   const onSubmit = async (data: FieldValues) => {
 
 
@@ -51,7 +44,7 @@ const handlepgagecontroller = (pgenumber:number) => {
      
   return (
     <div>
-      <Choicefile setpgecontroller={() => handlepgagecontroller(2)} setdata={ setfile} />
+      <Choicefile  setdata={ setfile} />
       <form onSubmit={handleSubmit(onSubmit)} className="bg-[#f8faff] mx-auto p-4 shadow-lg">
       <Toaster />
       <div className="grid gap-4 md:grid-cols-2 grid-cols-1">
@@ -75,7 +68,7 @@ const handlepgagecontroller = (pgenumber:number) => {
       
       </div>
 
-      <div className="w-3/12 mt-5">
+      <div className="w-3/12 mt-5 text-white">
        {
          file?.imgurl && file?.videourl  ? <button type="submit" className="bg-red-400 py-2 px-10 my-4 rounded-md" >Submite</button> :<span onClick={() =>  toast.success("Fires update imge and vioes then cliek here ")}  className="bg-red-400 py-4 px-10 my-4 rounded-md" >Submite disable</span>
        }
@@ -87,4 +80,4 @@ const handlepgagecontroller = (pgenumber:number) => {
   )
 }
 
-export default addblogpage
+export default Addblogpage

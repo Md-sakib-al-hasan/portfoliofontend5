@@ -26,7 +26,7 @@ type TSecialFetural = {
 
 
 
-export default function updateProduct() {
+export default function UpdateProduct() {
  
   const [file, setfile] = useState<Tchoicefile | null>(null);
   const [speial, setSpecial] = useState< TSecialFetural | null>(null);
@@ -35,14 +35,10 @@ export default function updateProduct() {
   const [description, setDescription] = useState< Tdescriptions | null>(null);
   const [linkpro, setLink] = useState< TProjectLink | null>(null);
   const [projectstatus,setprojectstaus] = useState(false);
-  const [pagecontroller,setpgecontrollers] = useState<number>(1);
   const params = useParams();
   const projectId = params.id;
   console.log(projectId)
-  const handlepgagecontroller = (pgenumber:number) => {
-                     setpgecontrollers(pgenumber)
-                     
-  }
+  
 
 
   
@@ -66,9 +62,9 @@ export default function updateProduct() {
     }
 
     const cleanedNewProjects = Object.fromEntries(
-      Object.entries(newprojects).filter(([_, v]) => v !== undefined)
+      Object.entries(newprojects).filter(([_, v]) => v !== undefined) // eslint-disable-line @typescript-eslint/no-unused-vars
     );
-    console.log(newprojects)
+    console.log(newprojects,)
     console.log(cleanedNewProjects)     
  }
 
@@ -79,12 +75,12 @@ export default function updateProduct() {
   
   return (
     <div >
-          <Choicefile setpgecontroller={() => handlepgagecontroller(2)} setdata={ setfile} />
-          <Specialfetured setpgecontroller={() => handlepgagecontroller(3)}  title="Specialfetured" setSpecial={setSpecial}  />
-           <Specialfetured setpgecontroller={() => handlepgagecontroller(4)} title="Technologies Used" setSpecial={setTechnology}  />
-          <Specialfetured setpgecontroller={() => handlepgagecontroller(5)} title="Fetured" setSpecial={setFetured }  />
-          <Descrioform setpgecontroller={() => handlepgagecontroller(6)} setprojectstatus={setprojectstaus} setdata={setDescription}/>
-           <ProjectLink setpgecontroller={() => handlepgagecontroller(7)} projectstatus={projectstatus} setdata={setLink}/>
+          <Choicefile setdata={ setfile} />
+          <Specialfetured   title="Specialfetured" setSpecial={setSpecial}  />
+           <Specialfetured  title="Technologies Used" setSpecial={setTechnology}  />
+          <Specialfetured  title="Fetured" setSpecial={setFetured }  />
+          <Descrioform  setprojectstatus={setprojectstaus} setdata={setDescription}/>
+           <ProjectLink  projectstatus={projectstatus} setdata={setLink}/>
         
         
          
@@ -99,7 +95,7 @@ export default function updateProduct() {
           <li className={`${description === null?"text-black":"text-green-400" }`}> Description  successfully update</li>
           <li className={`${linkpro === null?"text-black":"text-green-400" }`}>Link successfully update</li>
 
-          <div className=" mt-5 md:flex justify-between space-y-4">
+          <div className=" mt-5 md:flex justify-between space-y-4 text-white">
             <button onClick={handledatabasesave} className="py-2 px-3 bg-red-400 rounded-md">To permanetly update your project clicked here</button>
             <button className="py-2 px-3 bg-red-400 rounded-md"><Link href={"/drashboard"}>if you dont went to update cliked here</Link></button>
           </div>
