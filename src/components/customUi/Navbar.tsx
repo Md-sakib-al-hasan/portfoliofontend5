@@ -28,7 +28,7 @@ const Navbar = () => {
           <div className="text-red-400">
             <Image
               className="hidden dark:block"
-              src="/Logo.svg"
+              src="/image.svg"
               alt="Logo"
               width={30}
               height={30}

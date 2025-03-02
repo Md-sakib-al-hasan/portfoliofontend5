@@ -37,7 +37,7 @@ const Footer = () => {
     <div className="">
        <div className="container xl:px-0 px-8 mx-auto grid lg:grid-cols-4 md:grid-cols-2 lg:gap-4 gap-y-8 gap-x-6 py-20">
              <ul className="space-y-4">
-                <Image src="/logo.svg" width={100} height={100} alt="logo"/>
+                <Image src="./image.svg" width={100} height={100} alt="logo"/>
                 <li>any one any time contact me with this socilse mideya</li>
                 <li className="flex gap-4">
                      <a href="https://www.facebook.com" className="text-gray-600 dark:hover:text-customBlue hover:text-red-500 hover:scale-125" target="_blank" rel="noopener noreferrer">
