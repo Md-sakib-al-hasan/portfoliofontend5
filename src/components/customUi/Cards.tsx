@@ -1,20 +1,27 @@
 
 import React from 'react'
 import Card from './Card'
-const data = [
-  { id: 1, title: "sakib1", src: "https://i.ibb.co.com/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png", dis: "neverforget1" },
-  { id: 2, title: "sakib2", src: "https://i.ibb.co.com/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png", dis: "neverforget2" },
-  { id: 3, title: "sakib3", src: "https://i.ibb.co.com/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png", dis: "neverforget3" },
-  { id: 4, title: "sakib4", src: "https://i.ibb.co.com/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png", dis: "neverforget4" },
-  { id: 5, title: "sakib5", src: "https://i.ibb.co.com/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png", dis: "neverforget5" }
-];
+import allget from '@/actions/allget';
+import { TProject } from '@/types';
 
-const Cards = () => {
+
+export async function generateStaticParams() {
+  const result = await allget("/projects/get-all-project",undefined,60)
+  const allproject= result.data.result;
+  return allproject.slice(0, 5).map((project:TProject) => ({
+    id: project._id,
+  }));
+}
+
+const Cards = async() => {
+
+  const result = await allget("/projects/get-all-project",undefined,60)
+  const allproject= result.data.result;
   return (
     <div className='container mx-auto  xl:px-0  px-8 py-14 '>
         <ul className="grid lg:grid-cols-4 md:grid-cols-3  gap-5">
          {
-          data.map((item,index) => <li  key={index}>< Card title={item.title} dis={item.dis} src={item.src} id={item.id}  /></li> )
+          allproject.map((item:TProject) => <li  key={item._id}>< Card title={item.title} dis={item.description} src={item.imgurl} id={item._id}  /></li> )
          }
          </ul>
     </div>

@@ -11,6 +11,7 @@ export type Tchoicefile = {
 
 const Choicefile = ({ setdata }: { setdata: (value: Tchoicefile | null) => void }) => {
   const [loading, setLoading] = useState(false);
+  const [formKey, setFormKey] = useState(Date.now());
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -34,9 +35,7 @@ const Choicefile = ({ setdata }: { setdata: (value: Tchoicefile | null) => void 
     }
 
     if (videoFile && videoFile.size > 0) {
-      
       videourl = await uploadToCloudinary(videoFile, "video");
-      
       if (!videourl) {
         toast.error("Failed to upload video");
         setLoading(false);
@@ -47,22 +46,17 @@ const Choicefile = ({ setdata }: { setdata: (value: Tchoicefile | null) => void 
     if (!imgurl && !videourl) {
       setdata(null);
     } else {
-      toast.success(" upload video successfully");
+      toast.success("Upload successfully");
       setdata({ imgurl, videourl });
-      if (event.currentTarget) {
-        event.currentTarget.reset();
-      }
-    
-
+      setFormKey(Date.now()); // Reset form by changing key
     }
 
-    
     setLoading(false);
   };
 
   return (
-    <form onSubmit={onSubmit} className="bg-[#f8faff] mx-auto p-4 shadow-lg">
-      <Toaster/>
+    <form onSubmit={onSubmit} key={formKey} className="bg-[#f8faff] mx-auto p-4 shadow-lg">
+      <Toaster />
       <div className="grid gap-4 md:grid-cols-2 grid-cols-1">
         <div className="space-y-2">
           <label className="text-black">Project Image:</label>
@@ -75,7 +69,7 @@ const Choicefile = ({ setdata }: { setdata: (value: Tchoicefile | null) => void 
         </div>
       </div>
       <button type="submit" className="bg-red-400 py-2 text-white px-10 my-4 rounded-md" disabled={loading}>
-        {loading ? "Uploading..." : "upload"}
+        {loading ? "Uploading..." : "Upload"}
       </button>
     </form>
   );

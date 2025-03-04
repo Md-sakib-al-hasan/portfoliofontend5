@@ -4,7 +4,9 @@ import Projecttypes from "@/components/customUi/Projecttypes"
 import VidoeCards from "@/components/customUi/VidoeCards"
 
 
+
 const Blogpage = () => {
+    
   return (
     <div className="">
        <div className=" bg-gradient-to-r from-[#264871] to-[#4ebdb4] ">

@@ -6,22 +6,10 @@ import Specialfetured from "@/components/customUi/from/specialfetured";
 import ProjectLink from "@/components/customUi/from/projectLink";
 import Descrioform from "@/components/customUi/from/Descrioform";
 import { useParams } from "next/navigation";
-type Tdescriptions = {
-  title:string,
-  description:string,
-  details:string,
-  status:string,
-}
-
-type TProjectLink = {
-  fontendlink:string,
-  backendlink:string,
-  fontendsourcelink:string,
-  backendsourcelink:string,
-}
-type TSecialFetural = {
-  features:[],
-}
+import update from "@/actions/update";
+import toast, { Toaster } from "react-hot-toast";
+import { Tdescriptions, TProjectLink, TSecialFetural } from "../../addproject/page";
+import { MdOutlineOpenInFull } from "react-icons/md";
 
 
 
@@ -37,12 +25,11 @@ export default function UpdateProduct() {
   const [projectstatus,setprojectstaus] = useState(false);
   const params = useParams();
   const projectId = params.id;
-  console.log(projectId)
   
 
 
   
- const handledatabasesave = () => {
+ const handledatabasesave = async () => {
 
     const newprojects = {
       title:description?.title,
@@ -62,10 +49,20 @@ export default function UpdateProduct() {
     }
 
     const cleanedNewProjects = Object.fromEntries(
-      Object.entries(newprojects).filter(([_, v]) => v !== undefined) // eslint-disable-line @typescript-eslint/no-unused-vars
+      Object.entries(newprojects).filter(([_, v]) =>  v !== undefined && v !== "") // eslint-disable-line @typescript-eslint/no-unused-vars
     );
-    console.log(newprojects,)
-    console.log(cleanedNewProjects)     
+     console.log(cleanedNewProjects)
+    try {
+      const result = await update(cleanedNewProjects, "/projects/update-project",projectId as string); 
+       console.log(result)
+      if (result.error) {
+        toast.error("Error: " + result.error); 
+      } else {
+        toast.success("Project saved successfully!");
+      }
+    } catch (error: any) {
+      toast.error("Error during API request: " + error.message);
+    }     
  }
 
 
@@ -75,11 +72,15 @@ export default function UpdateProduct() {
   
   return (
     <div >
+          <Toaster/>
           <Choicefile setdata={ setfile} />
           <Specialfetured   title="Specialfetured" setSpecial={setSpecial}  />
            <Specialfetured  title="Technologies Used" setSpecial={setTechnology}  />
           <Specialfetured  title="Fetured" setSpecial={setFetured }  />
           <Descrioform  setprojectstatus={setprojectstaus} setdata={setDescription}/>
+          <div onClick={() => setprojectstaus(prev => !prev) } className=" cursor-pointer flex items-center gap-4">
+          <p className="py-4">{projectstatus?"To hidden backendLink form clicked  here":"To see backendLink form clicked  here"} </p><MdOutlineOpenInFull size={22} className="inline" />
+          </div>
            <ProjectLink  projectstatus={projectstatus} setdata={setLink}/>
         
         

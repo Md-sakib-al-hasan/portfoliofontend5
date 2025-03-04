@@ -1,4 +1,4 @@
-"use client"; // Ensures client-side rendering in Next.js 13+
+"use client"; 
 
 import React, { useEffect, useState } from "react";
 import Select, { SingleValue } from "react-select";

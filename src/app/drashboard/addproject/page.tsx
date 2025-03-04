@@ -5,6 +5,8 @@ import Choicefile, { Tchoicefile } from "@/components/customUi/from/choicefile";
 import Specialfetured from "@/components/customUi/from/specialfetured";
 import ProjectLink from "@/components/customUi/from/projectLink";
 import Descrioform from "@/components/customUi/from/Descrioform";
+import create from "@/actions/create";
+import toast, { Toaster } from "react-hot-toast";
 
 export type Tdescriptions = {
   title:string,
@@ -40,34 +42,47 @@ export default function AddProduct() {
 
 
 
- const handledatabasesave = () => {
 
-    const newprojects = {
-      title:description?.title,
-      description:description?.description,
-      details:description?.details,
-      status:description?.status,
-      imgurl:file?.imgurl,
-      videourl:file?.videourl,
-      frontendLiveLink:linkpro?.fontendlink,
-      frontendSourceLink:linkpro?.fontendsourcelink,
-      backendLiveLink:linkpro?.backendlink,
-      bakcendSroueLink:linkpro?.backendsourcelink,
-      specialFeatured:speial?.features,
-      Technologies:technology?.features,
-      featured:fetured?.features
+ const handledatabasesave = async () => {
+  const newprojects = {
+    title: description?.title,
+    description: description?.description,
+    details: description?.details,
+    status: description?.status,
+    imgurl: file?.imgurl,
+    videourl: file?.videourl,
+    frontendLiveLink: linkpro?.fontendlink,
+    frontendSourceLink: linkpro?.fontendsourcelink,
+    backendLiveLink: linkpro?.backendlink,
+    backendSourceLink: linkpro?.backendsourcelink,
+    specialFeatured: speial?.features,
+    Technologies: technology?.features,
+    featured: fetured?.features
+  };
+  const cleanedNewProjects = Object.fromEntries(
+    Object.entries(newprojects).filter(([_, v]) =>  v !== undefined && v !== "") // eslint-disable-line @typescript-eslint/no-unused-vars
+  );
+  console.log(cleanedNewProjects)
 
+  try {
+    const result = await create(cleanedNewProjects, "/projects/create-project"); 
+     console.log(result)
+    if (result.error) {
+      toast.error("Error: " + result.error); 
+    } else {
+      toast.success("Project saved successfully!");
     }
-    console.log(newprojects)     
- }
-
-
+  } catch (error: any) {
+    toast.error("Error during API request: " + error.message);
+  }
+};
      
   
   
   
   return (
     <div >
+          <Toaster/>
           <Choicefile setdata={ setfile} />
           <Specialfetured   title="Specialfetured" setSpecial={setSpecial}  />
            <Specialfetured  title="Technologies Used" setSpecial={setTechnology}  />
@@ -89,7 +104,10 @@ export default function AddProduct() {
           <li className={`${linkpro === null?"text-red-400":"text-black" }`}>Link successfully add</li>
 
           <div className=" mt-5 flex justify-between text-white">
-            <button onClick={handledatabasesave} className="py-2 px-3 bg-red-400 rounded-md text-white">To save project Clicke here</button>
+            {
+              file && linkpro && description && fetured && technology && speial ? <button onClick={handledatabasesave} className="py-2 px-3 bg-red-400 rounded-md text-white">To save project Clicke here</button> : <button  className="py-2 px-3 bg-red-400 rounded-md text-white">First Fulfill All Section</button>
+            }
+            
             <button className="py-2 px-3 bg-red-400 rounded-md text-white"><Link href={"/drashboard"}>dont the save project Clicke here</Link></button>
           </div>
         </ul>

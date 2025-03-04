@@ -28,7 +28,7 @@ const Descrioform = ({setdata, setprojectstatus}:{setdata:(data:Tdescriptions) =
       const onSubmit = async (data: FieldValues) => {
         setprojectstatus(statusValue?.value ==="frontEnd"? false: true)
         if(statusValue?.value){
-        setdata({status:statusValue?.value,description:data?.defaultValues,details:data?.details,title:data?.title})
+        setdata({status:statusValue?.value,description:data?.description,details:data?.details,title:data?.title})
         toast.success(" upload Descriptins successfully");
         reset();
         }

@@ -5,7 +5,11 @@
 
 import { IoMdSearch } from "react-icons/io";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { getalldata } from "@/components/hooks/getalldata";
+import { TMessage } from "@/types";
+import ClipLoader from "react-spinners/ClipLoader";
 
 
 
@@ -21,13 +25,43 @@ const Dashboardpage = () => {
   const { register, watch } = useForm();
   const searchValue = watch("search");
   const [sort,setSort] = useState("-createdAt")
-
-  console.log(searchValue,sort)
+  const [loading,setloading] = useState<boolean>(true);
+  const [result, setResult] = useState<TMessage[]>([]);
+  const fetchData = async () => {
+  
+    setloading(true)
+ try {
+   const data = await getalldata(sort, searchValue,"/message/get-all-message"); 
+    console.log(data)
+   if (data) {
      
+     setResult(data.reulst);
+     setloading(false)
+   }
+ } catch (error) {
+   toast.error("Something is wrong")
+   
+ }
+};
+ 
+  useEffect(() => {
+
+    fetchData();
+
+  }, [searchValue,sort]); 
+
   return (
     <div>
      
-
+     <div className="flex items-center justify-center">
+     <ClipLoader
+          color={"red"}
+          loading={loading}
+          size={50}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        /> 
+     </div>
       <div className="shadow-xl w-full rounded-lg bg-[#f8faff] p-6">
         <h2 className="text-xl font-semibold dark:text-customDark">All message</h2>
         <div className="flex items-center justify-end mt-4">
@@ -58,7 +92,7 @@ const Dashboardpage = () => {
               <span className="hidden sm:block">Descriptions</span>
             </li>
 
-            { messages.map((item, index) => (
+            { result?.map((item:TMessage, index) => (
              <li key={index} className="grid space-y-2 md:grid-cols-[1fr_2fr_3fr] items-center p-3 text-center shadow-xl hover:bg-gray-50 text-gray-700">
              
              

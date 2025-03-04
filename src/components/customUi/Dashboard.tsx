@@ -1,4 +1,5 @@
 "use client"
+import { FaLaptopCode} from "react-icons/fa";
 import { IoMdSearch } from "react-icons/io";
 import Link from "next/link";
 import { MdOutlineAddToQueue } from "react-icons/md";
@@ -6,67 +7,45 @@ import { TbStackFront } from "react-icons/tb";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { TProject } from "@/types";
+import toast, { Toaster } from "react-hot-toast";
+import { getalldata } from "../hooks/getalldata";
+import { deleteSingleitem } from "../hooks/deletesingleitem";
 import ClipLoader from "react-spinners/ClipLoader";
-import toast from "react-hot-toast";
-import { deleteSingleitem } from "@/components/hooks/deletesingleitem";
-import { getalldata } from "@/components/hooks/getalldata";
-import { TBlog } from "@/types";
 
 
 
-const projectArray = [
-  {
-    img: "https://i.ibb.co/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png",
-    title: "E-commerce Dashboard",
-    status: "Fullstack",
-    id: "proj-001"
-  },
-  {
-    img: "https://i.ibb.co/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png",
-    title: "Portfolio Website",
-    status: "Frontend",
-    id: "proj-002"
-  },
-  {
-    img: "https://i.ibb.co/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png",
-    title: "Task Management App",
-    status: "Fullstack",
-    id: "proj-003"
-  },
-  {
-    img: "https://i.ibb.co/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png",
-    title: "Weather App",
-    status: "Frontend",
-    id: "proj-004"
-  },
-  {
-    img: "https://i.ibb.co/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png",
-    title: "Social Media Platform",
-    status: "Fullstack",
-    id: "proj-005"
-  }
-];
 
-
-const Blogpage = () => {
+const Dashboard = () => {
   const { register, watch } = useForm();
   const searchValue = watch("search");
   const [sort,setSort] = useState("-createdAt")
+  const [result, setResult] = useState<TProject[]>([]); 
+  const [frontenditemnumbr,setFronetentitemnubmer] = useState<number>(0)
+  const [fullstackitemnumbr,setfullstacknubmer] = useState<number>(0)
   const [loading,setloading] = useState<boolean>(true);
-   const [result, setResult] = useState<TBlog[]>([]);
-   const [total,settotal] = useState<number>(0) 
 
-console.log(total)
+
 
   const fetchData = async () => {
-  
+    let fontenditme =0;
+    let fullStackitme =0;
        setloading(true)
     try {
-      const data = await getalldata(sort, searchValue,"/blog/get-all-blog"); 
+      const data = await getalldata(sort, searchValue,"/projects/get-all-project"); 
        console.log(data)
       if (data) {
-        settotal(data.totoal);
+         data.reulst.forEach((element:TProject)=> {
+          if(element.status === "frontEnd"){
+            fontenditme+=1
+        }
+        if(element.status === "fullStack"){
+            fullStackitme+=1
+        }
+         });
         setResult(data.reulst);
+        setFronetentitemnubmer(fontenditme);
+        setfullstacknubmer(fullStackitme);
         setloading(false)
       }
     } catch (error) {
@@ -78,7 +57,7 @@ console.log(total)
   const handleDelete = async (id: number | string) => {
      
     try{
-         const data = await deleteSingleitem(id,"/blog/delete-blog")
+         const data = await deleteSingleitem(id,"/projects/delete-project")
          toast.success("successfulley delte project")
          fetchData()
     }catch(err){
@@ -92,42 +71,61 @@ console.log(total)
 
   }, [searchValue,sort]); 
 
+  
+
+
+
+   
      
   return (
     <div>
-      <ul className="md:flex justify-between">
+      <ul className="grid md:grid-cols-3 xl:gap-10 gap-5">
+         <Toaster/>
+          
          
+        
       <li className="shadow-xl lg:px-6 md:px-2 py-8 px-8 rounded-md">
-          <span className="flex justify-between gap-20 lg:items-center items-start">
-            <span className="bg-blue-400 dark:bg-customBlue text-white px-3 rounded-md py-3 ">
+          <span className="flex justify-between lg:items-center items-start">
+            <span className="bg-blue-400 dark:bg-customBlue text-white px-3 rounded-md py-3">
               <TbStackFront size={25} />
             </span>
             <span className="flex flex-col gap-2">
-              <h4 className="lg:text-xl md:text-md font-medium ">Vidoes</h4>
+              <h4 className="lg:text-xl md:text-md font-medium ">Full stack projects</h4>
               <span className="lg:text-3xl text-2xl font-semibold">
                 <span className="hover:text-red-400 cursor-pointer">
-                    {total}
+                    {fullstackitemnumbr}
                 </span>
               </span>
             </span>
           </span>
         </li>
-        
         <li className="shadow-xl lg:px-6 md:px-2 py-8 px-8 rounded-md">
-          <span className="flex justify-between gap-20 lg:items-center items-start">
+          <span className="flex justify-between lg:items-center items-start">
+            <span className="bg-blue-400 dark:bg-customBlue  text-white px-3 rounded-md py-3">
+              <FaLaptopCode size={25} />
+            </span>
+            <span className="flex flex-col gap-2">
+              <h4 className="lg:text-xl md:text-md font-medium">Frontend projects</h4>
+              <span className="lg:text-3xl text-2xl font-semibold">{frontenditemnumbr}</span>
+            </span>
+          </span>
+        </li>
+        <li className="shadow-xl lg:px-6 md:px-2 py-8 px-8 rounded-md">
+          <span className="flex justify-between lg:items-center items-start">
             <span className="bg-blue-400 dark:bg-customBlue  text-white px-3 rounded-md py-3">
               <MdOutlineAddToQueue size={25} />
             </span>
             <span className="flex flex-col gap-2 text-right">
               <h4 className="lg:text-xl md:text-md font-medium">Add project</h4>
-              <span className="lg:text-3xl text-2xl font-semibold  hover:text-red-400 dark:text-customBlue"><Link href="/drashboard/blog/addBlog">Add</Link></span>
+              <span className="lg:text-3xl text-2xl font-semibold hover:text-red-400 dark:text-customBlue "><Link href="/drashboard/addproject">Add</Link></span>
             </span>
           </span>
         </li>
 
        
       </ul>
-      <div className="flex items-center justify-center">
+
+     <div className="flex items-center justify-center">
      <ClipLoader
           color={"red"}
           loading={loading}
@@ -136,8 +134,9 @@ console.log(total)
           data-testid="loader"
         /> 
      </div>
+
       <div className="shadow-xl w-full rounded-lg bg-[#f8faff] p-6">
-        <h2 className="text-xl font-semibold dark:text-customDark">All Blog</h2>
+        <h2 className="text-xl font-semibold dark:text-customDark">All Project</h2>
         <div className="flex items-center justify-end mt-4">
           <div className="relative flex items-center">
             <input
@@ -163,32 +162,33 @@ console.log(total)
             <li className=" hidden md:grid grid-cols-[1fr_3fr_2fr_1fr_1fr] p-3 text-center bg-gray-100 text-gray-600 font-semibold">
               <span>Project img</span>
               <span>Title</span>
-              <span className="hidden sm:block">Subject</span>
+              <span className="hidden sm:block">Status</span>
               <span>Update</span>
               <span className="text-center mx-10">Delete</span>
             </li>
 
-            {result?.map((item:TBlog, index) => (
+            {result.map((item, index) => (
              <li key={index} className="grid space-y-2 md:grid-cols-[1fr_3fr_2fr_1fr_1fr] items-center p-3 text-center shadow-xl hover:bg-gray-50 text-gray-700">
-             <Image src={item.imgurl} className=" object-cover md:w-[50px] md:h-[50px]" alt="img" width={400} height={400} />
+             <Image src={item.imgurl} className="md:rounded-full object-cover md:w-[50px] md:h-[50px]" alt="img" width={400} height={400} />
              
              <div className="flex items-center justify-center">
                <span className="block">{item.title}</span>
              </div>
              
              <div className="hidden sm:flex items-center justify-center">
-               <span>{item.subject}</span>
+               <span>{item.status}</span>
              </div>
              
              <div className="flex items-center justify-center">
                <span className="bg-blue-400 text-white text-center py-1 rounded-md px-4 md:w-auto w-full">
-                 <Link href={`/drashboard/blog/updateBlog/${item._id}`}>Update</Link>
+                 <Link href={`/drashboard/updateproject/${item._id}`}>Update</Link>
                </span>
              </div>
              
              <div className="flex items-center justify-center md:mx-5 cursor-pointer ">
-               <span onClick={() => handleDelete(item._id)} className="bg-red-400 text-white text-center py-1 rounded-md px-4 md:w-auto w-full">
+               <span  onClick={() => handleDelete(item._id)} className="bg-red-400 text-white text-center py-1 rounded-md px-4 md:w-auto w-full">
                  Delete
+
                </span>
              </div>
            </li>
@@ -202,4 +202,4 @@ console.log(total)
   );
 };
 
-export default Blogpage;
+export default Dashboard;

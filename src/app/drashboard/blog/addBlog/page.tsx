@@ -1,4 +1,5 @@
 "use client"
+import create from "@/actions/create";
 import Choicefile, { Tchoicefile } from "@/components/customUi/from/choicefile";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -34,8 +35,22 @@ const Addblogpage = () => {
           imgurl:file?.imgurl,
           videourl:file?.videourl
     }
+    const cleanedNewBlog = Object.fromEntries(
+      Object.entries(newBlog).filter(([_, v]) =>  v !== undefined && v !== "")
+    );
+    try {
+      const result = await create(cleanedNewBlog, "/blog/create-blog"); 
+       console.log(result)
+      if (result.error) {
+        toast.error("Error: " + result.error); 
+      } else {
+        toast.success("Blog saved successfully!");
+      }
+    } catch (error: any) {
+      toast.error("Error during API request: " + error.message);
+    }
 
-   toast.success("successfully add")
+
 
     reset();
 

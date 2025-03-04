@@ -22,6 +22,7 @@ const projectpage = () => {
        <div className=" ">
           <Cards/>
        </div>
+       
     </div>
   )
 }

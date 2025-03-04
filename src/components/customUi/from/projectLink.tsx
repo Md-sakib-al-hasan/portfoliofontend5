@@ -6,13 +6,11 @@ import toast, { Toaster } from 'react-hot-toast';
 import { TProjectLink } from '@/app/drashboard/addproject/page';
 
 const userSchema = z.object({
-  fontendlink: z.string().min(2, "Title must be at least 2 characters").optional(),
-  backendlink: z.string().min(2, "Title must be at least 2 characters").optional(),
-  fontendsourcelink: z.string().min(2, "Title must be at least 2 characters").optional(),
-  backendsourcelink: z.string().min(2, "Title must be at least 2 characters").optional(),
- 
+  fontendlink: z.union([z.string().url("Invalid frontend URL"), z.string().length(0)]).optional(),
+  backendlink: z.union([z.string().url("Invalid backend URL"), z.string().length(0)]).optional(),
+  fontendsourcelink: z.union([z.string().url("Invalid frontend source URL"), z.string().length(0)]).optional(),
+  backendsourcelink: z.union([z.string().url("Invalid backend source URL"), z.string().length(0)]).optional(),
 });
-
 
 
 const ProjectLink = ({setdata, projectstatus}:{ projectstatus:boolean,setdata: (data: TProjectLink) => void  }) => {
@@ -23,7 +21,7 @@ const ProjectLink = ({setdata, projectstatus}:{ projectstatus:boolean,setdata: (
       });
     
       const onSubmit = async (data: FieldValues) => {
-          setdata({backendlink:data?.backendlink,backendsourcelink:data?.bakcendSroueLink,fontendlink:data?.fontendlink,fontendsourcelink:data?.fontendsourcelink})
+          setdata({backendlink:data?.backendlink,backendsourcelink:data?.backendsourcelink,fontendlink:data?.fontendlink,fontendsourcelink:data?.fontendsourcelink})
           toast.success(" upload Rource code  and Live link  successfully");
           reset();
       };
