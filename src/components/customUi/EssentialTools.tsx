@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image"
 import react from "../assets/homepage/icons8-react-native-48.png"
 import figma from "../assets/homepage/figma.png"
@@ -13,7 +14,7 @@ import mongoDB from "../assets/homepage/icons8-mongo-db-48.png"
 import firebase from "../assets/homepage/icons8-firebase-48.png"
 import axios from "../assets/homepage/axios-seeklogo.png"
 import mongoose from "../assets/homepage/icons8-mongoose-48.png"
-
+import { motion } from "framer-motion"
 
 const learningTopics = [
     { name: "Figma", category: "Design", type: "UI/UX Design", image: figma },
@@ -33,35 +34,38 @@ const learningTopics = [
     { name: "Axios", category: "Frontend/Backend", type: "HTTP Client", image: axios },
 ];
 
-
-  
-  
-
-
 const EssentialTools = () => {
   return (
-    <div className="text-center space-y-5 xl:px-0 px-8 ">
+    <motion.div 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      transition={{ duration: 1 }}
+      className="text-center space-y-5 xl:px-0 px-8 "
+    >
       <h2 className="md:text-4xl font-semibold text-2xl">Essential Tools I Use</h2>
-      <p>Discover the  powerful tools and technologies i use to create exceptional ,high performing websites & applications </p>
-      <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3   gap-5">
-        {
-            learningTopics.map((item,index) => 
-            {
-                return <div key={index} className="border-2  rounded-md border-white/20">
-                <ul className="flex items-center gap-2 p-2 ">
-                     <li className="bg-white/20 py-2 px-1 rounded-lg"><Image className="w-7" src={item.image} alt="react"/></li>
-                     <li className="text-left">
-                       <span className="block text-lg">{item.name}</span>
-                       <span className="block text-[12px]">{item.type}</span> 
-                     </li>
-                 </ul>
-                </div>
-            }  )
-        }
-       
+      <p>Discover the powerful tools and technologies I use to create exceptional, high-performing websites & applications</p>
+      <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 gap-5">
+        {learningTopics.map((item, index) => (
+          <motion.div 
+            key={index} 
+            className="border-2 rounded-md border-white/20" 
+            whileHover={{ scale: 1.05 }} 
+            transition={{ duration: 0.3 }}
+          >
+            <ul className="flex items-center gap-2 p-2">
+              <li className="bg-white/20 py-2 px-1 rounded-lg">
+                <Image className="w-7" src={item.image} alt={item.name} />
+              </li>
+              <li className="text-left">
+                <span className="block text-lg">{item.name}</span>
+                <span className="block text-[12px]">{item.type}</span>
+              </li>
+            </ul>
+          </motion.div>
+        ))}
       </div>
-    </div>
-  )
-}
+    </motion.div>
+  );
+};
 
-export default EssentialTools
+export default EssentialTools;
