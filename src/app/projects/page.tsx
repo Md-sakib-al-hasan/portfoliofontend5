@@ -2,7 +2,12 @@ import Image from "next/image"
 import banner from "@/components/assets/project/sysadmin_03-removebg-preview.png"
 import Projecttypes from "@/components/customUi/Projecttypes"
 import Cards from "@/components/customUi/Cards"
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Projects (sakib)",
+  description: "Passionate Web Developer specializing in React, Next.js, and Tailwind CSS. Crafting dynamic and user-friendly web applications with attention to detail.",
+};
 
 const projectpage = () => {
   return (

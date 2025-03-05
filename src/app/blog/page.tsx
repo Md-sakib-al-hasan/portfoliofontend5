@@ -2,6 +2,12 @@ import Image from "next/image"
 import banner from "@/components/assets/project/3751179-removebg-preview.png"
 import Projecttypes from "@/components/customUi/Projecttypes"
 import VidoeCards from "@/components/customUi/VidoeCards"
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Blogs (sakib)",
+  description: "Passionate Web Developer specializing in React, Next.js, and Tailwind CSS. Crafting dynamic and user-friendly web applications with attention to detail.",
+};
 
 
 
