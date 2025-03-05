@@ -36,25 +36,25 @@ const Addblogpage = () => {
           videourl:file?.videourl
     }
     const cleanedNewBlog = Object.fromEntries(
-      Object.entries(newBlog).filter(([_, v]) =>  v !== undefined && v !== "")
+      Object.entries(newBlog).filter(([_, v]) =>  v !== undefined && v !== "")// eslint-disable-line @typescript-eslint/no-unused-vars
     );
     try {
       const result = await create(cleanedNewBlog, "/blog/create-blog"); 
-       console.log(result)
+
       if (result.error) {
         toast.error("Error: " + result.error); 
       } else {
         toast.success("Blog saved successfully!");
       }
-    } catch (error: any) {
-      toast.error("Error during API request: " + error.message);
+    } catch (error) {
+      toast.error("Error during API request: " + (error as Error).message);
     }
 
 
 
     reset();
 
-    console.log(newBlog);
+
   };
      
   return (

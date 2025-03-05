@@ -24,7 +24,7 @@ const SidebarList = () => {
             <li><LinkButton path="/drashboard" title="Project Management" icon={<GoProjectSymlink size={22} />} /></li>
             <li><LinkButton path="/drashboard/blog" title=" Blog Management" icon={<MdOutlineVideoSettings size={22} />} /></li>
             <li><LinkButton path="/drashboard/message" title="Message Management" icon={<TbMessageCircleUser size={22} />} /></li>
-            <li onClick={() => signOut({callbackUrl:"http://localhost:3000"})}>
+            <li onClick={() => signOut({callbackUrl: `${process.env.NEXT_PUBLIC_DOMAIN_FRONTEND}/login`})}>
             <button onClick={handleLogout} className="text-black  py-2 px-2 items-center rounded-lg group   text-md hover:bg-red-400 dark:hover:bg-customBlue hover:text-white w-full flex gap-2 ">
                    <span className="text-gray-600 dark:text-white group-hover:text-white dark:group-hover:text-customDark ">< RiLogoutCircleRLine ></RiLogoutCircleRLine></span> <span className="text-gray-600 dark:text-white group-hover:text-white dark:group-hover:text-customDark">Logout</span>
              </button>

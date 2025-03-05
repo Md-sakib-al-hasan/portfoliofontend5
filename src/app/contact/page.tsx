@@ -1,6 +1,5 @@
 "use client";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PiTelegramLogoLight } from "react-icons/pi";
 import { FaRegMap, FaSkype } from "react-icons/fa";
@@ -31,7 +30,7 @@ const Contact_us = () => {
     },
   });
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
       const newmessage= {
@@ -41,18 +40,17 @@ const Contact_us = () => {
       }
     try {
       const result = await create(newmessage, "/message/create-message"); 
-       console.log(result)
       if (result.error) {
         toast.error("Error: " + result.error); 
       } else {
         toast.success("Thank you for sending me your opinion");
       }
-    } catch (error: any) {
-      toast.error("Error during API request: " + error.message);
+    } catch (error) {
+      toast.error("Error during API request: " + (error as Error).message);
     }
-    console.log(data);
+
     reset();
-    setIsSubmitted(true);
+   
   };
 
   return (

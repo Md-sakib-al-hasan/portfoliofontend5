@@ -1,6 +1,6 @@
 export const uploadToCloudinary = async (file: File, resourceType: "image" | "video") => {
     if (!file) {
-        console.error("No file provided for upload.");
+       
         return null;
     }
 
@@ -8,7 +8,7 @@ export const uploadToCloudinary = async (file: File, resourceType: "image" | "vi
     const CLOUDINARY_CLOUD_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
 
     if (!CLOUDINARY_CLOUD_NAME) {
-        console.error("Cloudinary cloud name is not defined.");
+       
         return null;
     }
 

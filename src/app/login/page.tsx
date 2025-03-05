@@ -5,31 +5,31 @@ import { FcGoogle } from "react-icons/fc";
 import { InputField } from "@/components/customUi/InputField";
 import { PasswordField } from "@/components/customUi/InputPasswordFiled";
 import { signIn } from "next-auth/react"
-import { useRouter } from "next/navigation";
-import LoginForm from "@/actions/login";
 import toast, { Toaster } from "react-hot-toast";
-import Cookies from "js-cookie";
 
 const LoginPage = () => {
  
  
-  const router = useRouter();
+ 
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const result = await LoginForm(formData);
+   
 
-    if (result?.error) {
-      toast.error(result.error);
-    } else {
-      toast.success(result.message);
-      if (result.data?.accessToken) {
-        localStorage.setItem("accessToken", result.data.accessToken); 
-        Cookies.set("accessToken", result.data.accessToken, { expires: 1 });
-        router.push("/drashboard");
-      }
+    try {
+      await signIn("credentials", {
+        email: formData.get("email"),
+        password: formData.get("password"), 
+        redirect: true,
+        callbackUrl: `${process.env.NEXT_PUBLIC_DOMAIN_FRONTEND}/drashboard`,
+      });
+    } catch (error) {
+      toast.error((error as Error).message ||"some think is wrong") 
     }
+    
+    
+
   };
   
   return (
@@ -65,8 +65,8 @@ const LoginPage = () => {
           </form>
           <hr className="bg-gradient-to-r rounded-lg from-[#01ECA9] to-[#3757F8] h-1 border-none" />
           <div className="flex justify-center gap-2">
-          <button onClick={() => signIn("github",{callbackUrl:"http://localhost:3000/drashboard"})}><GrGithub size={30} /></button>
-          <button onClick={() => signIn("google",{callbackUrl:"http://localhost:3000/drashboard"})}><FcGoogle size={30} /></button>
+          <button onClick={() => signIn("github",{callbackUrl: `${process.env.NEXT_PUBLIC_DOMAIN_FRONTEND}/drashboard`})}><GrGithub size={30} /></button>
+          <button onClick={() => signIn("google",{callbackUrl: `${process.env.NEXT_PUBLIC_DOMAIN_FRONTEND}/drashboard`})}><FcGoogle size={30} /></button>
           </div>
         </div>
       </div>

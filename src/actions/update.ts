@@ -11,7 +11,6 @@ const update = async <T>(data: T, url: string,id:string) => {
     });
 
     const result = await response.json();
-    console.log(result)
     if (response.ok) {
       return result; 
     } else {
@@ -19,9 +18,8 @@ const update = async <T>(data: T, url: string,id:string) => {
     }
     
 
-  } catch (error: any) {
-    console.error("Error during API request:", error.message);
-    return { error: error.message || "Something went wrong" };
+  } catch (error) {
+    return { error: (error as Error).message || "Something went wrong" };
   }
 };
 

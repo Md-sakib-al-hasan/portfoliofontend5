@@ -26,7 +26,7 @@ const Choicefile = ({ setdata }: { setdata: (value: Tchoicefile | null) => void 
 
     if (imgFile && imgFile.size > 0) {
       imgurl = await uploadToCloudinary(imgFile, "image");
-      console.log("This is image url", imgurl);
+
       if (!imgurl) {
         toast.error("Failed to upload image");
         setLoading(false);

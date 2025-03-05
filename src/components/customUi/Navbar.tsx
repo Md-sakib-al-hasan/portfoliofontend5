@@ -7,8 +7,9 @@ import { Menu, UserIcon, X } from "lucide-react"; // Import icons
 import { motion } from "framer-motion";
 import Link from "next/link";
 import LightandDarktoggel from "@/components/customUi/LightandDarktoggel";
+import { Session } from "next-auth";
 
-const Navbar = () => {
+const Navbar = ({session}:{session:Session | null}) => {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false); // State for menu toggle
 
@@ -23,12 +24,12 @@ const Navbar = () => {
 
   return (
     <div className="bg-black/5">
-      <nav className="flex container mx-auto items-center justify-between xl:px-0 px-8  py-4 relative">
+      <nav className="flex md:flex-row flex-col  container mx-auto md:items-center items-end justify-between xl:px-0 px-2 md:px-8  py-4 relative">
         {/* Logo on the Left */}
         <Link href="/">
           <div className="text-red-400">
             <Image
-              className="hidden dark:block"
+              className="hidden  md:dark:block"
               src="/image.svg"
               alt="Logo"
               width={30}
@@ -58,11 +59,11 @@ const Navbar = () => {
                     : " dark:text-white text-black"
                 }text-red-400 dark:hover:text-[#00eeff] transition`}
               >
-                {item.name}
+               { session && item.name ==="SignIn" || session && item.name ==="Login"? "":item.name}
               </Link>
             </motion.li>
           ))}
-           <Link href="/drashboard"><UserIcon  className={`text-md font-medium ${
+           <Link className={`${session?"block":"hidden"}`} href="/drashboard"><UserIcon  className={`text-md font-medium ${
                   pathname === "/drashboard"
                     ? " text-red-400 dark:text-[#00eeff] font-bold"
                     : " dark:text-white text-black"
@@ -80,7 +81,7 @@ const Navbar = () => {
 
         {/* Mobile Navigation Menu */}
         {menuOpen && (
-          <div className="absolute top-full left-0 w-full bg-white dark:bg-[#1f232e] shadow-md p-6 md:hidden flex justify-between">
+          <div className="min-h-screen   top-full left-0 w-full bg-white dark:bg-[#1f232e] shadow-md p-6 md:hidden flex justify-between">
             <ul className="flex flex-col space-y-4">
               {navItems.map((item) => (
                 <li  key={item.path}>
@@ -93,12 +94,17 @@ const Navbar = () => {
                         : " dark:text-white text-black"
                     }  text-red-400 dark:hover:text-[#00eeff] transition`}
                   >
-                    {item.name}
+                   { session && item.name ==="SignIn" || session && item.name ==="Login"? "":item.name}
                   </Link>
                 </li>
               ))}
-              
+              <Link className={`${session?"block":"hidden"}`}  href="/drashboard"><UserIcon  className={`text-md font-medium ${
+                  pathname === "/drashboard"
+                    ? " text-red-400 dark:text-[#00eeff] font-bold"
+                    : " dark:text-white text-black"
+                }text-red-400 dark:hover:text-[#00eeff] transition`}/></Link>
             </ul>
+            
             <LightandDarktoggel/>
           </div>
         )}

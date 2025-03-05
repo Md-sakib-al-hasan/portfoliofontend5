@@ -6,14 +6,14 @@ import ShowSinglevioes from './ShowSinglevioes';
 import Link from 'next/link';
 import Card from './Card';
 import { TProject } from '@/types';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 
 
 
 const SingelCourse =({sidebardata, maindata}:{ maindata:TProject,sidebardata:TProject[]}) => {
      const [activestate,setActivestate] = useState<number>(0)
 
-     console.log(maindata)
+
      
 
      
@@ -51,7 +51,7 @@ const SingelCourse =({sidebardata, maindata}:{ maindata:TProject,sidebardata:TPr
                <p className='pb-5'>{maindata?.details}</p>
                 <ul>
                      {
-                        maindata?.specialFeatured.map((item,id) =>  <li key={id}>
+                        maindata?.specialFeatured?.map((item,id) =>  <li key={id}>
                         <span className='flex gap-2 items-center text-lg font-bold py-2'><FaCircle  className='dark:text-customBlue text-red-400'/>{item.title}</span>
                         <p className='ml-5'>{item.description}</p>
                     </li>)
@@ -59,7 +59,7 @@ const SingelCourse =({sidebardata, maindata}:{ maindata:TProject,sidebardata:TPr
                 </ul>
                 <h4 className='font-bold text-2xl py-5 '>Description</h4>
                 <p>
-                  {maindata.description}
+                  {maindata?.description}
                 </p>
              </div>
              <div  className={`${activestate==1?"block":"hidden"} mb-5 space-y-10`}>
@@ -86,18 +86,22 @@ const SingelCourse =({sidebardata, maindata}:{ maindata:TProject,sidebardata:TPr
                 <ul className='space-y-2'>
                     <h2 className='text-2xl font-semibold text-red-400 dark:text-customBlue'>Live Link</h2>
                     <li  className='dark:hover:text-customBlue hover:text-red-400 cursor-pointer'><Link href={maindata?.frontendLiveLink}>Fontend</Link></li>
-                    {
-                        maindata?.status === "fullStack" ?<li  className='dark:hover:text-customBlue hover:text-red-400  cursor-pointer'><Link href={maindata?.backendLiveLink!}>Backend</Link></li> : ""
-                    }
+                    {maindata?.status === "fullStack" && maindata?.backendLiveLink && (
+                    <li className='dark:hover:text-customBlue hover:text-red-400 cursor-pointer'>
+                        <Link href={maindata.backendLiveLink}>Backend</Link>
+                    </li>
+                    )}
                     
                 </ul>
                 <ul className='space-y-2 text-right'>
                    <h2 className='text-2xl font-semibold text-red-400 dark:text-customBlue'>Source Code</h2>
-                   <li className='dark:hover:text-customBlue hover:text-red-400  cursor-pointer'><Link href={maindata?.frontendSourceLink
-}>Fontend</Link></li>
-                   {
-                        maindata?.status === "fullStack" ?<li className='dark:hover:text-customBlue hover:text-red-400  cursor-pointer' ><Link href={maindata?.backendSourceLink!                        }>Backend</Link></li> : ""
-                    }
+                   <li className='dark:hover:text-customBlue hover:text-red-400  cursor-pointer'><Link href={maindata?.frontendSourceLink}>Fontend</Link></li>
+                  {maindata?.status === "fullStack" && maindata?.backendSourceLink && (
+                        <li className='dark:hover:text-customBlue hover:text-red-400 cursor-pointer'>
+                            <Link href={maindata.backendSourceLink}>Backend</Link>
+                        </li>
+                        )}
+
                    
                 </ul>
              </div>
@@ -117,7 +121,7 @@ const SingelCourse =({sidebardata, maindata}:{ maindata:TProject,sidebardata:TPr
                        
             <ul className="space-y-8">
          {
-          sidebardata.map((item,index) => <li  key={index}>< Card title={item.title} dis={item.description} src={item.imgurl} id={item._id}  /></li> )
+          sidebardata?.map((item,index) => <li  key={index}>< Card title={item.title} dis={item.description} src={item.imgurl} id={item._id}  /></li> )
          }
          </ul>
                 

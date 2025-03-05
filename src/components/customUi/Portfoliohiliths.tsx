@@ -2,16 +2,7 @@ import React from 'react'
 import HomeCard from './HomeCard';
 import allget from '@/actions/allget';
 import { TProject } from '@/types';
-const  carArray = [
-  {id:1},
-  {id:8},
-  {id:7},
-  {id:6},
-  {id:5},
-  {id:4},
-  {id:3},
-  {id:2},
-]
+
 
 const Portfoliohiliths =  async() => {
     const result = await allget("/projects/get-all-project",{limit:8},60)

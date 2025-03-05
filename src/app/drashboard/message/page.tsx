@@ -5,7 +5,7 @@
 
 import { IoMdSearch } from "react-icons/io";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { getalldata } from "@/components/hooks/getalldata";
 import { TMessage } from "@/types";
@@ -13,11 +13,6 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 
 
-const messages = [
-    { name: "User1", email: "user1@example.com", description: "Hello, how are you?", isAdmin: false },
-    { name: "Admin", email: "admin@example.com", description: "I'm here to help!", isAdmin: true },
-    { name: "User2", email: "user2@example.com", description: "Need some assistance.", isAdmin: false }
-  ];
 
 
 
@@ -27,28 +22,31 @@ const Dashboardpage = () => {
   const [sort,setSort] = useState("-createdAt")
   const [loading,setloading] = useState<boolean>(true);
   const [result, setResult] = useState<TMessage[]>([]);
-  const fetchData = async () => {
+
+
+
+
+  const fetchData = useCallback(async () => {
   
-    setloading(true)
- try {
-   const data = await getalldata(sort, searchValue,"/message/get-all-message"); 
-    console.log(data)
-   if (data) {
-     
-     setResult(data.reulst);
-     setloading(false)
-   }
- } catch (error) {
-   toast.error("Something is wrong")
-   
- }
-};
+    try {
+      const data = await getalldata(sort, searchValue,"/message/get-all-message"); 
+
+      if (data) {
+        
+        setResult(data.reulst);
+        setloading(false)
+      }
+    } catch (error) {
+      toast.error( (error as Error).message || "Something is wrong")
+      
+    }
+   },[searchValue,sort])
  
   useEffect(() => {
 
     fetchData();
 
-  }, [searchValue,sort]); 
+  }, [fetchData]); 
 
   return (
     <div>

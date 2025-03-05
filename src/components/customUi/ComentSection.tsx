@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import create from "@/actions/create";
 import toast, { Toaster } from "react-hot-toast";
-import { getalldata } from "../hooks/getalldata";
 import { MdModeComment } from "react-icons/md";
 
 
@@ -16,9 +15,9 @@ const commentSchema = z.object({
   comment: z.string().min(1, "Comment cannot be empty"),
 });
 
-export default function CommentSection({id}:{id:string}) {
+export default function CommentSection({ blogId}:{ blogId:string}) {
   const [commentlist,setcommentlist] = useState<{comment:string,_id:string}[]>([]);
-  console.log(commentlist)
+
   const {
     register,
     handleSubmit,
@@ -27,10 +26,10 @@ export default function CommentSection({id}:{id:string}) {
   } = useForm({
     resolver: zodResolver(commentSchema),
   });
-  const fetchData = async () => {
+  const fetchData = useCallback( async () => {
     
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_SERVER}/comment/get-all-comment?blogid=${id}`)
+      const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_SERVER}/comment/get-all-comment?blogid=${blogId}`)
       const data = await response.json()
       
       if (data) {
@@ -38,39 +37,40 @@ export default function CommentSection({id}:{id:string}) {
        
       }
     } catch (error) {
-      toast.error("Something is wrong")
+      toast.error(  (error as Error).message ||"Something is wrong")
       
     }
-  };
+  },[blogId])
 
+  
   const onSubmit = async (data:FieldValues) => {
      const newcomment ={
       comment:data?.comment,
-      blogid:id
+      blogid:blogId
      }
 
     try {
       const result = await create(newcomment, "/comment/create-comment"); 
-       console.log(result)
+
       if (result.error) {
         toast.error("Error: " + result.error); 
       } else {
         fetchData()
         toast.success("comment successfully Done");
       }
-    } catch (error: any) {
-      toast.error("Error during API request: " + error.message);
+    } catch (error) {
+      toast.error("Error during API request: " + (error as Error).message);
     }
-    console.log(data);
+
     reset();
     
-    console.log(commentSchema)
+
     reset();
   };
 
   useEffect(() => {
       fetchData()
-  }, [])
+  }, [fetchData])
   
 
   return (

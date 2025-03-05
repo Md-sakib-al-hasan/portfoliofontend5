@@ -4,7 +4,7 @@ import Link from "next/link";
 import { MdOutlineAddToQueue } from "react-icons/md";
 import { TbStackFront } from "react-icons/tb";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import ClipLoader from "react-spinners/ClipLoader";
 import toast from "react-hot-toast";
@@ -13,39 +13,6 @@ import { getalldata } from "@/components/hooks/getalldata";
 import { TBlog } from "@/types";
 
 
-
-const projectArray = [
-  {
-    img: "https://i.ibb.co/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png",
-    title: "E-commerce Dashboard",
-    status: "Fullstack",
-    id: "proj-001"
-  },
-  {
-    img: "https://i.ibb.co/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png",
-    title: "Portfolio Website",
-    status: "Frontend",
-    id: "proj-002"
-  },
-  {
-    img: "https://i.ibb.co/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png",
-    title: "Task Management App",
-    status: "Fullstack",
-    id: "proj-003"
-  },
-  {
-    img: "https://i.ibb.co/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png",
-    title: "Weather App",
-    status: "Frontend",
-    id: "proj-004"
-  },
-  {
-    img: "https://i.ibb.co/bWhBMNG/Create-Next-App-Google-Chrome-24-10-2024-15-17-50.png",
-    title: "Social Media Platform",
-    status: "Fullstack",
-    id: "proj-005"
-  }
-];
 
 
 const Blogpage = () => {
@@ -56,33 +23,32 @@ const Blogpage = () => {
    const [result, setResult] = useState<TBlog[]>([]);
    const [total,settotal] = useState<number>(0) 
 
-console.log(total)
 
-  const fetchData = async () => {
-  
-       setloading(true)
+
+  const fetchData = useCallback(async () => {
+
+       
     try {
       const data = await getalldata(sort, searchValue,"/blog/get-all-blog"); 
-       console.log(data)
       if (data) {
         settotal(data.totoal);
         setResult(data.reulst);
         setloading(false)
       }
     } catch (error) {
-      toast.error("Something is wrong")
+      toast.error(  (error as Error).message || "Something is wrong")
       
     }
-  };
+  },[searchValue,sort])
 
   const handleDelete = async (id: number | string) => {
      
     try{
-         const data = await deleteSingleitem(id,"/blog/delete-blog")
+         await deleteSingleitem(id,"/blog/delete-blog")
          toast.success("successfulley delte project")
          fetchData()
     }catch(err){
-        toast.error("Something is wrong")
+      toast.error(  (err as Error).message || "Something is wrong")
     }
 } 
 
@@ -90,7 +56,7 @@ console.log(total)
 
     fetchData();
 
-  }, [searchValue,sort]); 
+  }, [fetchData]); 
 
      
   return (

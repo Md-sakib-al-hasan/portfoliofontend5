@@ -2,13 +2,11 @@
 import update from "@/actions/update";
 import Choicefile, { Tchoicefile } from "@/components/customUi/from/choicefile"
 import { zodResolver } from "@hookform/resolvers/zod";
-import { strict } from "assert";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
-import { string, z } from "zod";
+import { z } from "zod";
 
 type Tdescriptions = {
   title:string |null,
@@ -31,9 +29,6 @@ const UpdateBlog = () => {
       const [file, setfile] = useState<Tchoicefile | null>(null);
       const [description, setDescription] = useState<Tdescriptions | null>(null);
       const {register,handleSubmit,formState: { errors },reset } = useForm({resolver: zodResolver(userSchema),});
-        const params = useParams();
-        const BlogId = params.id;
-
   
   const handledatabasesave= async () => {
     const newBlog = {
@@ -44,19 +39,19 @@ const UpdateBlog = () => {
       videourl:file?.videourl
 }
 const cleanedNewBlog = Object.fromEntries(
-  Object.entries(newBlog).filter(([_, v]) => v !== undefined && v !== "")
+  Object.entries(newBlog).filter(([_, v]) => v !== undefined && v !== "") // eslint-disable-line @typescript-eslint/no-unused-vars
 );
-  console.log(cleanedNewBlog)
+
 try {
   const result = await update(cleanedNewBlog, "/blog/update-blog","67c6884b37fcf3f0c93d2791"); 
-   console.log(result)
+
   if (result.error) {
     toast.error("Error: " + result.error); 
   } else {
     toast.success("Blog update successfully!");
   }
-} catch (error: any) {
-  toast.error("Error during API request: " + error.message);
+} catch (error) {
+  toast.error("Error during API request: " + (error as Error).message);
 }
 
   }      

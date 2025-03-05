@@ -5,13 +5,6 @@ import allget from '@/actions/allget';
 import { TProject } from '@/types';
 
 
-export async function generateStaticParams() {
-  const result = await allget("/projects/get-all-project",undefined,60)
-  const allproject= result.data.result;
-  return allproject.slice(0, 5).map((project:TProject) => ({
-    id: project._id,
-  }));
-}
 
 const Cards = async() => {
 

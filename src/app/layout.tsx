@@ -5,6 +5,8 @@ import "./globals.css";
 import { ThemeProvider } from "./provider/theme-provider";
 import Navbar from "@/components/customUi/Navbar";
 import Footer from "@/components/customUi/Footer";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/utils/authOptions";
 
 
 const roboto = Roboto({
@@ -18,11 +20,13 @@ export const metadata: Metadata = {
   description: "Passionate Web Developer specializing in React, Next.js, and Tailwind CSS. Crafting dynamic and user-friendly web applications with attention to detail.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+   const session = await getServerSession(authOptions)
   return (
     <html lang="en" suppressHydrationWarning>
       <body 
@@ -34,7 +38,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-          <Navbar />
+          <Navbar session={session} />
           {children}
           <Footer/>
         </ThemeProvider>

@@ -1,7 +1,14 @@
 "use server";
 
-const SigineForm = async (data: FormData) => {
-  const blogdata = Object.fromEntries(data.entries());
+const SigineForm = async (data: FormData | {name:string,email:string,password:string}) => {
+  let senddata ;
+  if (data && data instanceof FormData) {
+     senddata = Object.fromEntries(data.entries());
+
+  }else{
+    senddata=data
+  }
+
 
   try {
     const response = await fetch(`${process.env.DOMAIN_SERVER}/users/create-user`, {
@@ -9,7 +16,7 @@ const SigineForm = async (data: FormData) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(blogdata),
+      body: JSON.stringify(senddata),
     });
 
     const result = await response.json();
@@ -19,9 +26,8 @@ const SigineForm = async (data: FormData) => {
     } else {
       throw new Error(result.message || "Failed to create user");
     }
-  } catch (error: any) {
-    console.error("Error during API request:", error.message);
-    return { error: error.message || "Something went wrong" };
+  } catch (error) {
+    return { error: (error as Error).message || "Something went wrong" };
   }
 };
 

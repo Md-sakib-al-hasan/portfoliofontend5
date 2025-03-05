@@ -62,18 +62,18 @@ export default function AddProduct() {
   const cleanedNewProjects = Object.fromEntries(
     Object.entries(newprojects).filter(([_, v]) =>  v !== undefined && v !== "") // eslint-disable-line @typescript-eslint/no-unused-vars
   );
-  console.log(cleanedNewProjects)
+
 
   try {
     const result = await create(cleanedNewProjects, "/projects/create-project"); 
-     console.log(result)
+
     if (result.error) {
       toast.error("Error: " + result.error); 
     } else {
       toast.success("Project saved successfully!");
     }
-  } catch (error: any) {
-    toast.error("Error during API request: " + error.message);
+  } catch (error) {
+    toast.error("Error during API request: " + (error as Error).message);
   }
 };
      

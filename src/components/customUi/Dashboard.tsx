@@ -5,7 +5,7 @@ import Link from "next/link";
 import { MdOutlineAddToQueue } from "react-icons/md";
 import { TbStackFront } from "react-icons/tb";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { TProject } from "@/types";
 import toast, { Toaster } from "react-hot-toast";
@@ -27,13 +27,12 @@ const Dashboard = () => {
 
 
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     let fontenditme =0;
     let fullStackitme =0;
-       setloading(true)
     try {
       const data = await getalldata(sort, searchValue,"/projects/get-all-project"); 
-       console.log(data)
+
       if (data) {
          data.reulst.forEach((element:TProject)=> {
           if(element.status === "frontEnd"){
@@ -49,19 +48,19 @@ const Dashboard = () => {
         setloading(false)
       }
     } catch (error) {
-      toast.error("Something is wrong")
+      toast.error( (error as Error).message  ||"Something is wrong")
       
     }
-  };
+  },[searchValue,sort])
 
   const handleDelete = async (id: number | string) => {
      
     try{
-         const data = await deleteSingleitem(id,"/projects/delete-project")
+          await deleteSingleitem(id,"/projects/delete-project")
          toast.success("successfulley delte project")
          fetchData()
     }catch(err){
-        toast.error("Something is wrong")
+      toast.error( (err as Error).message  ||"Something is wrong")
     }
 } 
 
@@ -69,7 +68,7 @@ const Dashboard = () => {
 
     fetchData();
 
-  }, [searchValue,sort]); 
+  }, [fetchData]); 
 
   
 

@@ -1,4 +1,4 @@
-import { TProject } from "@/types";
+
 
 export const getalldata = async (sort:string,searchValue:string | undefined,url:string,) => {
     
@@ -11,7 +11,7 @@ export const getalldata = async (sort:string,searchValue:string | undefined,url:
         
         return {reulst:data.data.result,totoal:data.data.meta.total}
       } else {
-        console.error('Failed to fetch data');
+        
        
       }
     } catch (error) {

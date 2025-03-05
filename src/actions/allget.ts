@@ -1,6 +1,6 @@
-"use server"; // Makes this function run on the server
+"use server"; 
 
-interface QueryParams extends Record<string, any> {}
+type QueryParams = Record<string, string | number | boolean | undefined>;
 
 interface FetchOptions extends RequestInit {
   next?: { revalidate: number };
@@ -12,13 +12,14 @@ const allget = async <T extends QueryParams>(
   refactime?: number
 ) => {
   try {
-    // Conditionally create query string only if `query` is provided
+    
     const queryString = query
-      ? new URLSearchParams(Object.entries(query)).toString()
+      ? new URLSearchParams(
+          Object.entries(query).map(([key, value]) => [key, String(value)])
+        ).toString()
       : "";
 
-    console.log(queryString);
-    console.log(`${process.env.DOMAIN_SERVER}${url}${queryString ? `?${queryString}` : ""}`);
+
 
     const options: FetchOptions = {
       method: "GET",
@@ -43,9 +44,9 @@ const allget = async <T extends QueryParams>(
     } else {
       throw new Error(result.message || "Failed to fetch data");
     }
-  } catch (error: any) {
-    console.error("Error during API request:", error.message);
-    return { error: error.message || "Something went wrong" };
+  } catch (error) {
+    
+    return { error: (error as Error).message || "Something went wrong" };
   }
 };
 

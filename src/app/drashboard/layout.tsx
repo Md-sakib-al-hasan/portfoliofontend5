@@ -1,4 +1,5 @@
 
+import SigineForm from "@/actions/sigine";
 import SidebarList from "@/components/customUi/SidebarList"
 import { authOptions } from "@/utils/authOptions";
 import { getServerSession } from "next-auth"
@@ -9,6 +10,9 @@ import  { ReactNode } from "react"
 const layout = async ({children}:{children:ReactNode}) => {
 
   const session = await getServerSession(authOptions);
+  if(session?.user?.name && session?.user.email){
+     await SigineForm({name:session.user?.name,email:session.user?.email,password:"dmeo"}) 
+  }
    
   return  (
     <div  className={`flex md:flex-row flex-col  `}>

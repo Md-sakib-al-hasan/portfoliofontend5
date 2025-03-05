@@ -37,6 +37,14 @@ export type allarrayobject = {
     email: string;
     description: string;
   }
+
+  export interface TSession
+     {
+      name?: string | undefined |null
+      email?: string | undefined | null ;
+      image?: string | null | undefined
+    };
+  
   
   
   

@@ -13,9 +13,9 @@ export async function uploadImageToImgBB(imageFile: File): Promise<string | null
 
         const data = await response.json();
         if (data.success) {
-            return data.data.url; // ✅ Return the image URL
+            return data.data.url; 
         } else {
-            console.error("Upload failed:", data.error);
+           
             throw new Error("Image upload failed");
         }
     } catch (error) {
