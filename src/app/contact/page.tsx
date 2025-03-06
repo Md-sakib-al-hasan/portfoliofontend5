@@ -6,6 +6,7 @@ import { FaRegMap, FaSkype } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
 import { z } from "zod";
 import toast, { Toaster } from "react-hot-toast";
+import create from "@/actions/create";
 
 interface IFormInput {
   name: string;
@@ -38,17 +39,12 @@ const Contact_us = () => {
         description:data?.message,
       }
     try {
-           await fetch(`${process.env.NEXT_PUBLIC_DOMAIN_SERVER}"/message/create-message"`,{
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-      body: JSON.stringify(newmessage),
-           }) 
-     
-    
+      const result = await create(newmessage, "/message/create-message"); 
+      if (result.error) {
+        toast.error("Error: " + result.error); 
+      } else {
         toast.success("Thank you for sending me your opinion");
-      
+      }
     } catch (error) {
       toast.error("Error during API request: " + (error as Error).message);
     }
