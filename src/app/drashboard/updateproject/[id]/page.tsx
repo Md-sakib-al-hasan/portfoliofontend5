@@ -49,10 +49,11 @@ export default function UpdateProduct() {
     }
 
     const cleanedNewProjects = Object.fromEntries(
-      Object.entries(newprojects).filter(([_, v]) =>  v !== undefined && v !== "") // eslint-disable-line @typescript-eslint/no-unused-vars
+      Object.entries(newprojects).filter(([_, v]) =>  v !== undefined && v !== null && v !== "") // eslint-disable-line @typescript-eslint/no-unused-vars
     );
 
     try {
+       console.log(cleanedNewProjects)
       const result = await update(cleanedNewProjects, "/projects/update-project",projectId as string); 
 
       if (result.error) {

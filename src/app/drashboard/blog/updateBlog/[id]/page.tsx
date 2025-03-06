@@ -39,7 +39,7 @@ const UpdateBlog = () => {
       videourl:file?.videourl
 }
 const cleanedNewBlog = Object.fromEntries(
-  Object.entries(newBlog).filter(([_, v]) => v !== undefined && v !== "") // eslint-disable-line @typescript-eslint/no-unused-vars
+  Object.entries(newBlog).filter(([_, v]) => v !== undefined && v !== null && v !== "") // eslint-disable-line @typescript-eslint/no-unused-vars
 );
 
 try {
