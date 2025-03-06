@@ -1,17 +1,17 @@
-# Bicycle Ordering API
+# Portfolio
 
 This portfolio project consists of a Frontend and Backend system to showcase personal projects, blogs, and provide a contact form. The application uses Next.js with TypeScript for the frontend and Express.js for the backend. It includes user authentication using NextAuth and stores data in MongoDB.
 
 ---
 
 ## Live Links
-- **Frontend (Live)**: [Bicycle Frontend](https://portfoliofontend5.vercel.app/)
-- **Backend (Live)**: [Bicycle Backend](https://portfolio-backend5.vercel.app/)
+- **Frontend (Live)**: [Portfolio Frontend](https://portfoliofontend5.vercel.app/)
+- **Backend (Live)**: [Portfolio Backend](https://portfolio-backend5.vercel.app/)
 
 ## Source Code
 
-- **Frontend Source Code**: [Bicycle Frontend GitHub](https://github.com/Md-sakib-al-hasan/portfoliofontend5)
-- **Backend Source Code**: [Bicycle Backend GitHub](https://github.com/Md-sakib-al-hasan/PortfolioBackend5)
+- **Frontend Source Code**: [Portfolio Frontend GitHub](https://github.com/Md-sakib-al-hasan/portfoliofontend5)
+- **Backend Source Code**: [Portfolio Backend GitHub](https://github.com/Md-sakib-al-hasan/PortfolioBackend5)
 
 ---
 
