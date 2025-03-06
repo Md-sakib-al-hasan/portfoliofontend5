@@ -85,7 +85,7 @@ const Blogpage = () => {
               <MdOutlineAddToQueue size={25} />
             </span>
             <span className="flex flex-col gap-2 text-right">
-              <h4 className="lg:text-xl md:text-md font-medium">Add project</h4>
+              <h4 className="lg:text-xl md:text-md font-medium">Add Blog</h4>
               <span className="lg:text-3xl text-2xl font-semibold  hover:text-red-400 dark:text-customBlue"><Link href="/drashboard/blog/addBlog">Add</Link></span>
             </span>
           </span>

@@ -13,7 +13,7 @@ const VideoCard: React.FC<VideoCardProps> = ({ id, src,title,description }) => {
   if (!id || !src) return null;
 
   return (
-     <div>
+     <div className="flex flex-col items-center justify-center">
       <div className="relative group w-[300px] h-[160px] overflow-hidden bg-red-400">
       <Image
         src={src}
@@ -28,7 +28,7 @@ const VideoCard: React.FC<VideoCardProps> = ({ id, src,title,description }) => {
         </div>
       </Link>
     </div>
-      <div className="py-4">
+      <div className="py-4 md:text-left text-center  ">
       <h2  className="text-2lx font-semibold capitalize ">{title}</h2>
        <p className="line-clamp-2">{description}</p>
       </div>
