@@ -31,7 +31,7 @@ const learningTopics = [
     { name: "Mongoose", category: "Backend", type: "MongoDB ODM", image: mongoose },
     { name: "Firebase", category: "Backend", type: "Backend as a Service", image: firebase },
     { name: "Axios", category: "Frontend/Backend", type: "HTTP Client", image: axios },
-    { name: "Axios", category: "Frontend/Backend", type: "HTTP Client", image: axios },
+   
 ];
 
 const EssentialTools = () => {
