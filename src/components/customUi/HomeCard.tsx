@@ -9,7 +9,7 @@ const HomeCard = ({imgurl,livelink, id,title}:TCardProes) => {
   return (
     <div>
        <div className="p-4 border-2 bg-white dark:bg-gray-900 rounded-lg space-y-4  shadow-md ">
-        <Image src={imgurl} className="min-w-50 max-w-50 max-h-60 min-h-60 object-fill " width={300} height={300} alt=""/>
+        <Image src={imgurl} className="min-w-50 max-w-50 max-h-60 min-h-60 object-contain " width={300} height={300} alt=""/>
         <div className="flex justify-between items-center">
             <div >
                  <span className="block text-lg font-semibold mb-2 line-clamp-1">{title}</span>
