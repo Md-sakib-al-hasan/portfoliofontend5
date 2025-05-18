@@ -14,6 +14,9 @@ import mongoDB from "../assets/homepage/icons8-mongo-db-48.png"
 import firebase from "../assets/homepage/icons8-firebase-48.png"
 import axios from "../assets/homepage/axios-seeklogo.png"
 import mongoose from "../assets/homepage/icons8-mongoose-48.png"
+import prisma from "../assets/homepage/prisma.png"
+import nestjs from "../assets/homepage/nestjs.png"
+
 import { motion } from "framer-motion"
 
 const learningTopics = [
@@ -31,6 +34,9 @@ const learningTopics = [
     { name: "Mongoose", category: "Backend", type: "MongoDB ODM", image: mongoose },
     { name: "Firebase", category: "Backend", type: "Backend as a Service", image: firebase },
     { name: "Axios", category: "Frontend/Backend", type: "HTTP Client", image: axios },
+    { name: "Prisma", category: "Backend", type: "ORM (Object-Relational Mapping)", image: prisma },
+    { name: "NestJS", category: "Backend", type: "Node.js Framework", image: nestjs },
+
    
 ];
 
@@ -48,7 +54,7 @@ const EssentialTools = () => {
         {learningTopics.map((item, index) => (
           <motion.div 
             key={index} 
-            className="border-2 rounded-md border-white/20" 
+            className="border-2 rounded-md dark:border-white/20 border-black/20" 
             whileHover={{ scale: 1.05 }} 
             transition={{ duration: 0.3 }}
           >

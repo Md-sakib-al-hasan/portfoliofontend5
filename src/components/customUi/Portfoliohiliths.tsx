@@ -6,7 +6,7 @@ import { TProject } from '@/types';
 
 const Portfoliohiliths =  async() => {
     const result = await allget("/projects/get-all-project",{limit:8},60)
-  const Eightproject= result.data.result;
+  const Eightproject= result?.data?.result;
   return (
     <div className="py-20 space-y-8 xl:px-0 px-8">
             <h2 className="md:text-4xl text-2xl font-semibold text-center capitalize">My portfolio highlights</h2>

@@ -11,8 +11,14 @@ import * as React from "react"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 
-const LightandDarktoggel = () => {
+const LightandDarktoggel = ({menu}:{menu?: React.Dispatch<React.SetStateAction<boolean>>}) => {
     const { setTheme } = useTheme()
+    const handle = () => {
+      setTheme("light")
+      if(menu) [
+         menu(false)
+      ]
+    } 
   return (
     <div>
          <DropdownMenu>
@@ -23,13 +29,13 @@ const LightandDarktoggel = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+        <DropdownMenuItem onClick={() =>{ if (menu) {menu(false);} setTheme("light")}}>
           Light
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
+        <DropdownMenuItem onClick={() =>{ if (menu) {menu(false);} setTheme("dark")}}>
           Dark
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
+        <DropdownMenuItem onClick={() =>{ if (menu) {menu(false);} setTheme("system")}}>
           System
         </DropdownMenuItem>
       </DropdownMenuContent>
