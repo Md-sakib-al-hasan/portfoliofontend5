@@ -12,8 +12,9 @@ export default function Home() {
     <div  className="container mx-auto">
        <Banner/>
        <EssentialTools/>
-       <Portfoliohiliths/>
-       <About/>
+        <About/>
+       {/* <Portfoliohiliths/> */}
+      
     </div>
   );
 }
