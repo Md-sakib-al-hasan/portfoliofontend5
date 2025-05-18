@@ -74,7 +74,8 @@ const Banner = () => {
     transition={{ duration: 1 }}
     className="list-none"
   >
-    <Link className="block" href="https://drive.google.com/uc?export=download&id=1Blmf8vRue8RcamRqX7IRvi1yCOjKwk28" download>
+    <Link className="block" href="https://drive.google.com/uc?export=download&id=1bXIkBheutEVFAEL1zeMLkzoM3u5CO0EA
+" download>
       <button className="bg-red-400 dark:bg-[#00eeff] py-2 px-6 rounded-md text-white dark:text-[#1f232e] shadow-lg shadow-red-400/30 dark:shadow-[#00eeff]/30 font-medium transition-all hover:bg-red-500 dark:hover:bg-[#00d6e7] hover:shadow-red-500/40 dark:hover:shadow-[#00d6e7]/40 hover:-translate-y-0.5">
         Download CV
       </button>
