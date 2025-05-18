@@ -13,12 +13,7 @@ import { useTheme } from "next-themes"
 
 const LightandDarktoggel = ({menu}:{menu?: React.Dispatch<React.SetStateAction<boolean>>}) => {
     const { setTheme } = useTheme()
-    const handle = () => {
-      setTheme("light")
-      if(menu) [
-         menu(false)
-      ]
-    } 
+    
   return (
     <div>
          <DropdownMenu>

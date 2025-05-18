@@ -8,15 +8,9 @@ import {
   Layers,
   Lightbulb,
   Monitor,
-  Palette,
   Server,
   GraduationCap,
   Briefcase,
-  Mail,
-  Github,
-  Linkedin,
-  Twitter,
-  ExternalLink,
 } from "lucide-react"
 import sakib from "../../../public/sakib3.png"
 
@@ -82,25 +76,7 @@ export default function AboutPage() {
     },
   ]
 
-  const projects = [
-    {
-      name: "E-Commerce Platform",
-      description:
-        "A full-stack e-commerce solution with payment integration, user authentication, and admin dashboard.",
-      technologies: ["Next.js", "MongoDB", "Stripe", "AWS"],
-    },
-    {
-      name: "Task Management App",
-      description:
-        "A collaborative task management application with real-time updates and team collaboration features.",
-      technologies: ["React", "Firebase", "Material UI", "Redux"],
-    },
-    {
-      name: "Portfolio Website",
-      description: "A responsive portfolio website with dark mode, animations, and contact form.",
-      technologies: ["Next.js", "Tailwind CSS", "Framer Motion", "Vercel"],
-    },
-  ]
+  
 
   const container = {
     hidden: { opacity: 0 },
