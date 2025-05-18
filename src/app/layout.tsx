@@ -7,7 +7,7 @@ import Navbar from "@/components/customUi/Navbar";
 import Footer from "@/components/customUi/Footer";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/authOptions";
-
+import { Toaster } from 'sonner';
 
 const roboto = Roboto({
   weight: ["100", "300", "400", "500", "700", "900"],
@@ -39,6 +39,7 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
           <Navbar session={session} />
+          <Toaster  richColors  /> 
           {children}
           <Footer/>
         </ThemeProvider>
