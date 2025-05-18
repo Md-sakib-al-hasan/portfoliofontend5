@@ -6,7 +6,7 @@ import { InputField } from "@/components/customUi/InputField";
 import { PasswordField } from "@/components/customUi/InputPasswordFiled";
 import { signIn } from "next-auth/react"
 import toast, { Toaster } from "react-hot-toast";
-
+import { toast as toastmessage } from 'sonner';
 const LoginPage = () => {
  
  
@@ -65,8 +65,8 @@ const LoginPage = () => {
           </form>
           <hr className="bg-gradient-to-r rounded-lg from-[#01ECA9] to-[#3757F8] h-1 border-none" />
           <div className="flex justify-center gap-2">
-          <button onClick={() => signIn("github",{callbackUrl: `${process.env.NEXT_PUBLIC_DOMAIN_FRONTEND}/drashboard`})}><GrGithub size={30} /></button>
-          <button onClick={() => signIn("google",{callbackUrl: `${process.env.NEXT_PUBLIC_DOMAIN_FRONTEND}/drashboard`})}><FcGoogle size={30} /></button>
+          <button onClick={() => toastmessage.info("GitHub login is currently restricted to selected users.")}><GrGithub size={30} /></button>
+          <button onClick={() => toastmessage.info("Google login is currently restricted to selected users.")}><FcGoogle size={30} /></button>
           </div>
         </div>
       </div>
