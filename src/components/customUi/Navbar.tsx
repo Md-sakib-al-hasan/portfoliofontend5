@@ -20,6 +20,7 @@ const Navbar = ({session}:{session:Session | null}) => {
     { name: "Contact", path: "/contact" },
     { name: "Login", path: "/login" },
     { name: "SignIn", path: "/sigine" },
+    { name: "About", path: "/about" },
   ];
 
   return (
@@ -105,7 +106,7 @@ const Navbar = ({session}:{session:Session | null}) => {
                 }text-red-400 dark:hover:text-[#00eeff] transition`}/></Link>
             </ul>
             
-            <LightandDarktoggel/>
+            <LightandDarktoggel menu={setMenuOpen}/>
           </div>
         )}
       </nav>
