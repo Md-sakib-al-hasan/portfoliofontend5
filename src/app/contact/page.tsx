@@ -2,7 +2,7 @@
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PiTelegramLogoLight } from "react-icons/pi";
-import { FaRegMap, FaSkype } from "react-icons/fa";
+import { FaRegMap } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
 import { z } from "zod";
 import toast, { Toaster } from "react-hot-toast";
@@ -127,10 +127,10 @@ const Contact_us = () => {
               <div className="bg-[#182c42] xl:w-9/12 w-full rounded-xl md:px-14 px-4 py-10 text-white font-semibold">
                 <h2 className="text-4xl pb-10 pt-4">Contact info</h2>
                 <ul className="space-y-8">
-                  <li className="flex gap-5"><PiTelegramLogoLight size={25} /> mdsakibalhasa@gmail.com</li>
+                  <li className="flex gap-5"><PiTelegramLogoLight size={25} />md.sakib.al.hasan.programmer@gmail.com</li>
                   <li className="flex gap-5"><FaPhone size={25} /> 01625457343</li>
-                  <li className="flex gap-5"><FaRegMap size={35} /> 22 Grandrose Street North Fort Myers, FL 33917</li>
-                  <li className="flex gap-5"><FaSkype size={25} /> live:cycling.example</li>
+                  <li className="flex gap-5"><FaRegMap size={35} /> Jamgora Ashulia sava Dhaka</li>
+                  
                 </ul>
               </div>
             </div>

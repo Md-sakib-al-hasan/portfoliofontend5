@@ -3,81 +3,75 @@
 import { motion } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
-import {
-  Database,
-  Layers,
-  Lightbulb,
-  Monitor,
-  Server,
-  GraduationCap,
-  Briefcase,
- 
-} from "lucide-react"
+import { Layers, Monitor, GraduationCap, Briefcase, Code, Layout, Globe } from "lucide-react"
 import sakib from "../../../public/sakib3.png"
-
 
 export default function AboutPage() {
   const skills = [
     {
       name: "Frontend Development",
       icon: <Monitor className="h-6 w-6" />,
-      description: "React, Next.js, TypeScript, Tailwind CSS",
+      description: "HTML, CSS, JavaScript, React.js, Next.js",
     },
     {
-      name: "Backend Development",
-      icon: <Server className="h-6 w-6" />,
-      description: "Node.js, Express, MongoDB, PostgreSQL",
+      name: "CSS Frameworks",
+      icon: <Layout className="h-6 w-6" />,
+      description: "Tailwind CSS, Bootstrap",
     },
-    { name: "Full Stack", icon: <Layers className="h-6 w-6" />, description: "End-to-end application development" },
     {
-      name: "Database Management",
-      icon: <Database className="h-6 w-6" />,
-      description: "MongoDB, PostgreSQL, Firebase",
+      name: "TypeScript",
+      icon: <Code className="h-6 w-6" />,
+      description: "Type-safe JavaScript development",
     },
-    { name: "Web Performance", icon: <Lightbulb className="h-6 w-6" />, description: "Optimization, SEO, Analytics" },
+    {
+      name: "Responsive Design",
+      icon: <Globe className="h-6 w-6" />,
+      description: "Cross-Browser Compatibility",
+    },
+    {
+      name: "Version Control",
+      icon: <Layers className="h-6 w-6" />,
+      description: "Git, GitHub",
+    },
   ]
 
   const experiences = [
     {
-      title: "Senior Full Stack Developer",
-      company: "Tech Innovations Inc.",
-      period: "2021 - Present",
+      title: "Web Design Intern",
+      company: "Creative IT Institute",
+      period: "Industrial Attachment",
       description:
-        "Leading development of enterprise web applications using Next.js, TypeScript, and MongoDB. Implemented CI/CD pipelines and improved site performance by 40%.",
-    },
-    {
-      title: "Frontend Developer",
-      company: "Digital Solutions Ltd.",
-      period: "2019 - 2021",
-      description:
-        "Developed responsive user interfaces using React and Redux. Collaborated with designers to implement pixel-perfect UIs and improve user experience.",
-    },
-    {
-      title: "Web Developer Intern",
-      company: "StartUp Hub",
-      period: "2018 - 2019",
-      description:
-        "Assisted in developing web applications using JavaScript and PHP. Gained hands-on experience with modern web development practices.",
+        "Gained practical experience in front-end development, focusing on HTML, CSS, and JavaScript. Collaborated on projects to develop responsive and user-friendly web pages. Enhanced skills in design frameworks such as Tailwind CSS and Bootstrap to create visually appealing layouts.",
     },
   ]
 
   const education = [
     {
-      degree: "Master of Computer Science",
-      institution: "Tech University",
-      period: "2017 - 2019",
-      description: "Specialized in Web Technologies and Software Engineering. Graduated with honors.",
+      degree: "Diploma in Computer Science & Engineering",
+      institution: "City Institute of Technology",
+      period: "2020 - 2024",
+      description: "Focused on web development and programming fundamentals.",
+    },
+    
+  ]
+
+  const courses = [
+    {
+      name: "Web Development Level One",
+      provider: "Programming Hero",
+      period: "Complete Course",
+      description: "Fundamentals of web development including HTML, CSS, JavaScript and responsive design.",
     },
     {
-      degree: "Bachelor of Computer Science",
-      institution: "State University",
-      period: "2013 - 2017",
-      description:
-        "Focused on Programming and Database Management. Participated in multiple hackathons and coding competitions.",
+      name: "Web Development Level Two",
+      provider: "Programming Hero",
+      period: "Complete Course",
+      description: "Advanced web development with React, state management, and frontend frameworks.",
     },
   ]
 
-  
+ 
+
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -132,7 +126,7 @@ export default function AboutPage() {
                   <div className="absolute inset-0 flex items-center justify-center">
                     <Image
                       src={sakib.src}
-                      alt="Professional developer portrait"
+                      alt="Sakib Al Hasan"
                       width={400}
                       height={450}
                       className="object-cover w-full h-full"
@@ -157,7 +151,7 @@ export default function AboutPage() {
                   transition={{ duration: 0.5, delay: 0.5 }}
                   viewport={{ once: true }}
                 >
-                  About <span className="dark:text-[#00D2E0] text-red-400">Me</span>
+                  SAKIB <span className="dark:text-[#00D2E0] text-red-400">AL HASAN</span>
                 </motion.h1>
                 <motion.h2
                   className="text-2xl md:text-left md:text-3xl text-center font-semibold text-black dark:text-white"
@@ -166,7 +160,7 @@ export default function AboutPage() {
                   transition={{ duration: 0.5, delay: 0.6 }}
                   viewport={{ once: true }}
                 >
-                  Full Stack Web Developer
+                  Junior Web Developer
                 </motion.h2>
               </div>
               <motion.p
@@ -176,7 +170,9 @@ export default function AboutPage() {
                 transition={{ duration: 0.5, delay: 0.7 }}
                 viewport={{ once: true }}
               >
-                {`I'm a full stack developer with a passion for crafting clean, responsive UIs and building powerful backends. From Figma to Firebase, I work across the stack using tools like React, Next.js, TypeScript, Express, MongoDB, and more. With a focus on performance and usability, I turn ideas into functional web applications that scale.`}
+                Junior Web Developer with expertise in HTML, CSS, Tailwind CSS, JavaScript, React, and TypeScript.
+                Skilled in creating responsive, dynamic interfaces and leveraging frameworks for streamlined
+                functionality. Eager to contribute to innovative projects in a collaborative team environment.
               </motion.p>
               <motion.div
                 className="flex flex-wrap gap-4"
@@ -195,7 +191,7 @@ export default function AboutPage() {
                   href="/projects"
                   className="inline-flex items-center justify-center rounded-full bg-transparent border border-red-400 dark:border-[#00D2E0] px-6 py-3 text-sm font-medium text-red-500 dark:text-[#00D2E0] hover:bg-red-50 dark:hover:bg-gray-800 transition-colors"
                 >
-                  View projects
+                  View Projects
                 </Link>
               </motion.div>
             </motion.div>
@@ -203,8 +199,56 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Contact Information Section */}
+      <section className="w-full py-12 md:py-16 bg-gray-50 dark:bg-gray-800">
+        <div className="container px-4 md:px-6 mx-auto">
+          <motion.div
+            className="text-center mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold text-black dark:text-white mb-4">Contact</h2>
+            <div className="w-20 h-1 bg-red-400 dark:bg-[#00D2E0] mx-auto mb-6"></div>
+          </motion.div>
+
+          <motion.div
+            className="grid gap-6 md:grid-cols-3 max-w-3xl mx-auto"
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+          >
+            <motion.div
+              className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 text-center"
+              variants={item}
+            >
+              <h3 className="text-lg font-semibold text-black dark:text-white mb-2">Phone</h3>
+              <p className="text-gray-700 dark:text-gray-300">01625457343</p>
+            </motion.div>
+
+            <motion.div
+              className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 text-center"
+              variants={item}
+            >
+              <h3 className="text-lg font-semibold text-black dark:text-white mb-2">Email</h3>
+              <p className="text-gray-700 dark:text-gray-300 break-all">md.sakib.al.hasan.programmer@gmail.com</p>
+            </motion.div>
+
+            <motion.div
+              className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 text-center"
+              variants={item}
+            >
+              <h3 className="text-lg font-semibold text-black dark:text-white mb-2">Location</h3>
+              <p className="text-gray-700 dark:text-gray-300">Jamgora, Ashulia, Savar, Dhaka</p>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Skills Section */}
-      <section id="skills" className="w-full py-16 md:py-24 bg-gray-50 dark:bg-gray-800">
+      <section id="skills" className="w-full py-16 md:py-24">
         <div className="container px-4 md:px-6 mx-auto">
           <motion.div
             className="text-center mb-12"
@@ -213,11 +257,11 @@ export default function AboutPage() {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl font-bold text-black dark:text-white mb-4">My Expertise</h2>
+            <h2 className="text-3xl font-bold text-black dark:text-white mb-4">Skills</h2>
             <div className="w-20 h-1 bg-red-400 dark:bg-[#00D2E0] mx-auto mb-6"></div>
             <p className="max-w-2xl mx-auto text-gray-700 dark:text-gray-300">
-              I specialize in a range of technologies across the full stack development spectrum, with a focus on
-              creating scalable and maintainable web applications.
+              I specialize in a range of technologies for web development, with a focus on creating responsive and
+              user-friendly interfaces.
             </p>
           </motion.div>
 
@@ -249,7 +293,7 @@ export default function AboutPage() {
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="w-full py-16 md:py-24">
+      <section id="experience" className="w-full py-16 md:py-24 bg-gray-50 dark:bg-gray-800">
         <div className="container px-4 md:px-6 mx-auto">
           <motion.div
             className="text-center mb-12"
@@ -258,10 +302,10 @@ export default function AboutPage() {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl font-bold text-black dark:text-white mb-4">Professional Journey</h2>
+            <h2 className="text-3xl font-bold text-black dark:text-white mb-4">Industrial Attachment</h2>
             <div className="w-20 h-1 bg-red-400 dark:bg-[#00D2E0] mx-auto mb-6"></div>
             <p className="max-w-2xl mx-auto text-gray-700 dark:text-gray-300">
-              My career path in web development, from internship to senior roles.
+              My practical experience in web development.
             </p>
           </motion.div>
 
@@ -298,7 +342,7 @@ export default function AboutPage() {
       </section>
 
       {/* Education Section */}
-      <section id="education" className="w-full py-16 md:py-24 bg-gray-50 dark:bg-gray-800">
+      <section id="education" className="w-full py-16 md:py-24">
         <div className="container px-4 md:px-6 mx-auto">
           <motion.div
             className="text-center mb-12"
@@ -346,9 +390,57 @@ export default function AboutPage() {
         </div>
       </section>
 
-    
+      {/* Courses Section */}
+      <section id="courses" className="w-full py-16 md:py-24 bg-gray-50 dark:bg-gray-800">
+        <div className="container px-4 md:px-6 mx-auto">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold text-black dark:text-white mb-4">Courses</h2>
+            <div className="w-20 h-1 bg-red-400 dark:bg-[#00D2E0] mx-auto mb-6"></div>
+            <p className="max-w-2xl mx-auto text-gray-700 dark:text-gray-300">
+              Professional development and specialized training.
+            </p>
+          </motion.div>
 
-     
+          <div className="max-w-3xl mx-auto">
+            {courses.map((course, index) => (
+              <motion.div
+                key={index}
+                className="mb-12 relative pl-8 md:pl-12"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                {/* Timeline line */}
+                {index < courses.length - 1 && (
+                  <div className="absolute left-3 md:left-4 top-6 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-700"></div>
+                )}
+
+                {/* Timeline dot */}
+                <div className="absolute left-0 top-1 w-6 h-6 rounded-full bg-red-400 dark:bg-[#00D2E0] flex items-center justify-center">
+                  <GraduationCap className="h-3 w-3 text-white dark:text-black" />
+                </div>
+
+                <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
+                  <span className="text-sm font-medium text-red-500 dark:text-[#00D2E0] block mb-1">
+                    {course.period}
+                  </span>
+                  <h3 className="text-xl font-bold text-black dark:text-white">{course.name}</h3>
+                  <h4 className="text-lg text-gray-700 dark:text-gray-300 mb-3">{course.provider}</h4>
+                  <p className="text-gray-600 dark:text-gray-400">{course.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
     </main>
   )
 }

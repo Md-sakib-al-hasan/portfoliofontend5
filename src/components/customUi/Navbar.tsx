@@ -19,7 +19,6 @@ const Navbar = ({session}:{session:Session | null}) => {
     { name: "Blog", path: "/blog" },
     { name: "Contact", path: "/contact" },
     { name: "Login", path: "/login" },
-    { name: "SignIn", path: "/sigine" },
     { name: "About", path: "/about" },
   ];
 
