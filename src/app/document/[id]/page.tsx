@@ -9,6 +9,28 @@ import allget from "@/actions/allget"
 import { TDocument } from "@/types"
 
 
+function ChunkedParagraph({ text }: { text?: string| undefined }) {
+  if (!text) return null;
+
+  const words = text.split(" ");
+  const chunks = [];
+
+  for (let i = 0; i < words.length; i += 100) {
+    chunks.push(words.slice(i, i + 100).join(" "));
+  }
+
+  return (
+    <div className="prose prose-gray max-w-none dark:prose-invert">
+      {chunks.map((chunk, idx) => (
+        <p key={idx} className="text-justify mb-6">
+          {chunk}
+        </p>
+      ))}
+    </div>
+  );
+}
+
+
 
 
 export default async function BlogPostPage({ params }: {params: Promise<{ id: string }>}) {
@@ -64,8 +86,10 @@ export default async function BlogPostPage({ params }: {params: Promise<{ id: st
         </div>
 
         <div className="prose prose-gray max-w-none dark:prose-invert">
+
           
-            <p>{post?.excerpt}</p>
+          <ChunkedParagraph text={post?.excerpt} />
+            
         
         </div>
       </div>
