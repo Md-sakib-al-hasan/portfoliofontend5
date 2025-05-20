@@ -44,6 +44,25 @@ export type allarrayobject = {
       email?: string | undefined | null ;
       image?: string | null | undefined
     };
+
+
+export interface TDocument {
+   _id:string;
+  title: string;
+  excerpt: string;
+  date: string;
+  readTime: string;
+  category: string;
+  author: {
+    name: string;
+  };
+  coverImage: string;
+  content: string;
+  tags?: string[];
+  isPublished: boolean;
+  isDelete: boolean;
+}
+
   
   
   

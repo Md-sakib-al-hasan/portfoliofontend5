@@ -5,7 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { InputField } from "@/components/customUi/InputField";
 import { PasswordField } from "@/components/customUi/InputPasswordFiled";
 import { signIn } from "next-auth/react"
-import toast, { Toaster } from "react-hot-toast";
+import  { Toaster } from "react-hot-toast";
 import { toast as toastmessage } from 'sonner';
 const LoginPage = () => {
  
@@ -18,6 +18,7 @@ const LoginPage = () => {
    
 
     try {
+       
       await signIn("credentials", {
         email: formData.get("email"),
         password: formData.get("password"), 
@@ -25,7 +26,7 @@ const LoginPage = () => {
         callbackUrl: `${process.env.NEXT_PUBLIC_DOMAIN_FRONTEND}/drashboard`,
       });
     } catch (error) {
-      toast.error((error as Error).message ||"some think is wrong") 
+      toastmessage.error((error as Error).message ||"some think is wrong") 
     }
     
     
