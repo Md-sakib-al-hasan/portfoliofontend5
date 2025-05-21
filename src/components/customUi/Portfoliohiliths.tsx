@@ -12,7 +12,7 @@ const Portfoliohiliths =  async() => {
             <h2 className="md:text-4xl text-2xl font-semibold text-center capitalize">My portfolio highlights</h2>
             <ul className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-5">
              {
-              Eightproject.map((item:TProject) =>  <li key={item._id}>  <HomeCard title={item.title} imgurl={item.imgurl} livelink={item.frontendLiveLink} id={item._id} /></li>)
+              Eightproject.map((item:TProject) =>  <li key={item._id}>  <HomeCard description={item.description}   title={item.title} imgurl={item.imgurl} livelink={item.frontendLiveLink} id={item._id} /></li>)
              }
             </ul>
        </div>
