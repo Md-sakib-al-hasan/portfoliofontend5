@@ -44,7 +44,7 @@ const CreateEducation = () => {
 
     // Remove undefined, null, or empty string values
     const cleanedEducationData = Object.fromEntries(
-      Object.entries(educationData).filter(([, v]) => v !== undefined && v !== null && v !== ""),
+      Object.entries(educationData).filter(([_, v]) => v !== undefined && v !== null && v !== ""),
     )
 
     try {
