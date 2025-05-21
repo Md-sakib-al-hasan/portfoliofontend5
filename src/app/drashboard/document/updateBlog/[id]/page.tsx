@@ -10,24 +10,60 @@ import toast, { Toaster } from "react-hot-toast"
 import { z } from "zod"
 
 // Define the blog schema with all fields optional but validated when present
+
+
 const blogSchema = z.object({
-  title: z.string().min(1, { message: "Title is required" }).optional(),
-  excerpt: z.string().min(1, { message: "Excerpt is required" }).optional(),
-  subject: z.string().min(1, { message: "Subject is required" }).optional(),
-  date: z.string().min(1, { message: "Date is required" }).optional(),
-  readTime: z.string().min(1, { message: "Read time is required" }).optional(),
-  category: z.string().min(1, { message: "Category is required" }).optional(),
-  author: z
-    .object({
-      name: z.string().min(1, { message: "Author name is required" }).optional(),
-    })
-    .optional(),
-  description: z.string().min(20, { message: "Description must be at least 20 characters" }).optional(),
-  content: z.string().min(1, { message: "Content is required" }).optional(),
-  tags: z.array(z.string()).min(1, { message: "At least one tag is required" }).optional(),
-  isPublished: z.boolean().optional(),
-  isDelete: z.boolean().optional(),
-})
+  title: z.union([
+    z.string().min(1, { message: "Title is required" }),
+    z.string().length(0)
+  ]).optional().nullable(),
+
+  excerpt: z.union([
+    z.string().min(1, { message: "Excerpt is required" }),
+    z.string().length(0)
+  ]).optional().nullable(),
+
+ 
+
+  date: z.union([
+    z.string().min(1, { message: "Date is required" }),
+    z.string().length(0)
+  ]).optional().nullable(),
+
+  readTime: z.union([
+    z.string().min(1, { message: "Read time is required" }),
+    z.string().length(0)
+  ]).optional().nullable(),
+
+  category: z.union([
+    z.string().min(1, { message: "Category is required" }),
+    z.string().length(0)
+  ]).optional().nullable(),
+
+  author: z.object({
+    name: z.union([
+      z.string().min(1, { message: "Author name is required" }),
+      z.string().length(0)
+    ]).optional().nullable(),
+  }).optional().nullable(),
+
+ 
+
+  content: z.union([
+    z.string().min(1, { message: "Content is required" }),
+    z.string().length(0)
+  ]).optional().nullable(),
+
+  coverImage: z.union([
+    z.string().url(),
+    z.string().length(0)
+  ]).optional().nullable(),
+
+  tags: z.array(z.string()).min(1, { message: "At least one tag is required" }).optional().nullable(),
+
+  
+});
+
 
 // Type for the form data
 type TBlogData = z.infer<typeof blogSchema>
@@ -44,7 +80,7 @@ const UpdateBlog = () => {
     handleSubmit,
     formState: { errors },
     reset,
-    setValue,
+   
   } = useForm<TBlogData>({
     resolver: zodResolver(blogSchema),
   })
@@ -57,7 +93,7 @@ const UpdateBlog = () => {
 
     const newBlog = {
       ...blogData,
-      imgurl: file?.imgurl,
+      coverImage: file?.imgurl,
       videourl: file?.videourl,
       tags: tags.length > 0 ? tags : undefined,
     }
@@ -65,6 +101,7 @@ const UpdateBlog = () => {
     // Remove undefined, null, or empty string values
     const cleanedNewBlog = Object.fromEntries(
       Object.entries(newBlog).filter(([_, v]) => {
+        console.log(_)
         if (typeof v === "object" && v !== null) {
           return Object.keys(v).length > 0
         }
@@ -79,6 +116,7 @@ const UpdateBlog = () => {
         toast.error("Error: " + result.error)
       } else {
         toast.success("Blog updated successfully!")
+        reset()
       }
     } catch (error) {
       toast.error("Error during API request: " + (error as Error).message)
@@ -132,25 +170,9 @@ const UpdateBlog = () => {
             {errors.title && <p className="text-red-500 text-sm">{errors.title.message}</p>}
           </div>
 
-          <div className="space-y-2">
-            <label className="text-black font-medium">Subject:</label>
-            <input
-              {...register("subject")}
-              placeholder="Blog subject"
-              className="border text-black border-gray-400 placeholder:text-gray-400 bg-white p-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-red-300"
-            />
-            {errors.subject && <p className="text-red-500 text-sm">{errors.subject.message}</p>}
-          </div>
+        
 
-          <div className="space-y-2">
-            <label className="text-black font-medium">Excerpt:</label>
-            <input
-              {...register("excerpt")}
-              placeholder="Short excerpt"
-              className="border text-black border-gray-400 placeholder:text-gray-400 bg-white p-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-red-300"
-            />
-            {errors.excerpt && <p className="text-red-500 text-sm">{errors.excerpt.message}</p>}
-          </div>
+        
 
           <div className="space-y-2">
             <label className="text-black font-medium">Category:</label>
@@ -226,12 +248,12 @@ const UpdateBlog = () => {
           <div className="space-y-2 md:col-span-2">
             <label className="text-black font-medium">Description:</label>
             <textarea
-              {...register("description")}
+              {...register("excerpt")}
               placeholder="Short description (min 20 characters)"
               className="border text-black border-gray-400 placeholder:text-gray-400 bg-white p-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-red-300"
               rows={3}
             ></textarea>
-            {errors.description && <p className="text-red-500 text-sm">{errors.description.message}</p>}
+            {errors.excerpt && <p className="text-red-500 text-sm">{errors.excerpt.message}</p>}
           </div>
 
           <div className="space-y-2 md:col-span-2">
@@ -245,14 +267,7 @@ const UpdateBlog = () => {
             {errors.content && <p className="text-red-500 text-sm">{errors.content.message}</p>}
           </div>
 
-          <div className="space-y-2 flex items-center gap-4">
-            <label className="text-black font-medium">Published:</label>
-            <input
-              type="checkbox"
-              {...register("isPublished")}
-              className="h-5 w-5 rounded border-gray-300 text-red-400 focus:ring-red-300"
-            />
-          </div>
+         
         </div>
 
         <div className="mt-6">
@@ -282,7 +297,7 @@ const UpdateBlog = () => {
             Save Changes
           </button>
           <Link
-            href="/dashboard"
+            href="/drashboard"
             className="py-2 px-6 bg-gray-500 rounded-md text-white hover:bg-gray-600 transition text-center"
           >
             Cancel

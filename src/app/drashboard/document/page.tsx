@@ -87,7 +87,7 @@ const Documentpage = () => {
             </span>
             <span className="flex flex-col gap-2 text-right">
               <h4 className="lg:text-xl md:text-md font-medium">Add Documents</h4>
-              <span className="lg:text-3xl text-2xl font-semibold  hover:text-red-400 dark:text-customBlue"><Link href="/drashboard/blog/addBlog">Add</Link></span>
+              <span className="lg:text-3xl text-2xl font-semibold  hover:text-red-400 dark:text-customBlue"><Link href="/drashboard/document/addBlog">Add</Link></span>
             </span>
           </span>
         </li>
