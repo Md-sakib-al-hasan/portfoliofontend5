@@ -3,6 +3,7 @@ import update from "@/actions/update";
 import Choicefile, { Tchoicefile } from "@/components/customUi/from/choicefile"
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
@@ -24,7 +25,7 @@ const userSchema = z.object({
 
 const UpdateBlog = () => {
      
-
+      const {id} = useParams()
       
       const [file, setfile] = useState<Tchoicefile | null>(null);
       const [description, setDescription] = useState<Tdescriptions | null>(null);
@@ -43,7 +44,7 @@ const cleanedNewBlog = Object.fromEntries(
 );
 
 try {
-  const result = await update(cleanedNewBlog, "/blog/update-blog","67c6884b37fcf3f0c93d2791"); 
+  const result = await update(cleanedNewBlog, "/blog/update-blog",id as string); 
 
   if (result.error) {
     toast.error("Error: " + result.error); 

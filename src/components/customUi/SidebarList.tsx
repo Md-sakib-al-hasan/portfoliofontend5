@@ -5,6 +5,7 @@ import { GoProjectSymlink } from "react-icons/go"
 import { MdOutlineVideoSettings } from "react-icons/md"
 import { RiLogoutCircleRLine } from "react-icons/ri"
 import { TbMessageCircleUser } from "react-icons/tb"
+import { CgFileDocument } from "react-icons/cg";
 import { useRouter } from "next/navigation"; 
 import Cookies from "js-cookie";
 
@@ -22,7 +23,8 @@ const SidebarList = () => {
   return (
     <ul className="space-y-1">
             <li><LinkButton path="/drashboard" title="Project Management" icon={<GoProjectSymlink size={22} />} /></li>
-            <li><LinkButton path="/drashboard/blog" title=" Blog Management" icon={<MdOutlineVideoSettings size={22} />} /></li>
+            <li><LinkButton path="/drashboard/blog" title=" vidoe Blog Management" icon={<MdOutlineVideoSettings size={22} />} /></li>
+            <li><LinkButton path="/drashboard/document" title=" text Blog Management" icon={<CgFileDocument  size={22} />} /></li>
             <li><LinkButton path="/drashboard/message" title="Message Management" icon={<TbMessageCircleUser size={22} />} /></li>
             <li onClick={() => signOut({callbackUrl: `${process.env.NEXT_PUBLIC_DOMAIN_FRONTEND}/login`})}>
             <button onClick={handleLogout} className="text-black  py-2 px-2 items-center rounded-lg group   text-md hover:bg-red-400 dark:hover:bg-customBlue hover:text-white w-full flex gap-2 ">

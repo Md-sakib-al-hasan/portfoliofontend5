@@ -9,7 +9,7 @@ export type Tchoicefile = {
   videourl: string | null;
 };
 
-const Choicefile = ({ setdata }: { setdata: (value: Tchoicefile | null) => void }) => {
+const Choicefile = ({ setdata,isshowvidoes}: { setdata: (value: Tchoicefile | null) => void, isshowvidoes?:boolean }) => {
   const [loading, setLoading] = useState(false);
   const [formKey, setFormKey] = useState(Date.now());
 
@@ -63,10 +63,10 @@ const Choicefile = ({ setdata }: { setdata: (value: Tchoicefile | null) => void 
           <input type="file" name="img" className="border text-black border-gray-400 p-2 w-full rounded-md focus:outline-none" />
         </div>
 
-        <div className="space-y-2">
+       {isshowvidoes? "": <div className="space-y-2">
           <label className="text-black">Project Video:</label>
           <input type="file" name="video" className="border text-black border-gray-400 p-2 w-full rounded-md focus:outline-none" />
-        </div>
+        </div>}
       </div>
       <button type="submit" className="bg-red-400 py-2 text-white px-10 my-4 rounded-md" disabled={loading}>
         {loading ? "Uploading..." : "Upload"}
