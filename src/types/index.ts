@@ -63,6 +63,25 @@ export interface TDocument {
   isDelete: boolean;
 }
 
+
+export interface TCourse {
+   _id:string;
+  name: string;
+  provider: string;
+  period: string;
+  description: string;
+}
+
+export interface TEducation {
+   _id:string;
+  degree: string;
+  institution: string;
+  year: string;
+  description: string;
+}
+
+
+
   
   
   

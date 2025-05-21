@@ -5,8 +5,48 @@ import Link from "next/link"
 import Image from "next/image"
 import { Layers, Monitor, GraduationCap, Briefcase, Code, Layout, Globe } from "lucide-react"
 import sakib from "../../../public/sakib3.png"
+import { getalldata } from "@/components/hooks/getalldata"
+import { toast } from "sonner"
+import {  useCallback, useEffect, useState } from "react"
+import { TCourse, TEducation } from "@/types"
 
 export default function AboutPage() {
+
+  const [courses,setcourse] = useState<TCourse[] | []>([]);
+  const [education,seteducation] = useState<TEducation[] | []>([]);
+
+
+
+  const fetchData = useCallback(async () => {
+  
+         
+      try {
+        const data = await getalldata("des", undefined,"/course/get-all-courses"); 
+        const result = await getalldata("des", undefined,"/education//get-all-educations"); 
+         if(!data) {
+            toast.error(  "Something is wrong")
+         }
+         if(!result){
+           toast.error(  "Something is wrong")
+         }
+         setcourse(data?.reulst);
+         seteducation(result?.reulst)
+      } catch (error) {
+        toast.error(  (error as Error).message || "Something is wrong")
+        
+      }
+    },[])
+  
+
+  
+    useEffect(() => {
+  
+      fetchData();
+  
+    }, [fetchData]); 
+
+
+
   const skills = [
     {
       name: "Frontend Development",
@@ -45,30 +85,8 @@ export default function AboutPage() {
     },
   ]
 
-  const education = [
-    {
-      degree: "Diploma in Computer Science & Engineering",
-      institution: "City Institute of Technology",
-      period: "2020 - 2024",
-      description: "Focused on web development and programming fundamentals.",
-    },
-    
-  ]
 
-  const courses = [
-    {
-      name: "Web Development Level One",
-      provider: "Programming Hero",
-      period: "Complete Course",
-      description: "Fundamentals of web development including HTML, CSS, JavaScript and responsive design.",
-    },
-    {
-      name: "Web Development Level Two",
-      provider: "Programming Hero",
-      period: "Complete Course",
-      description: "Advanced web development with React, state management, and frontend frameworks.",
-    },
-  ]
+ 
 
  
 
@@ -379,7 +397,7 @@ export default function AboutPage() {
                 </div>
 
                 <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
-                  <span className="text-sm font-medium text-red-500 dark:text-[#00D2E0] block mb-1">{edu.period}</span>
+                  <span className="text-sm font-medium text-red-500 dark:text-[#00D2E0] block mb-1">{edu.year}</span>
                   <h3 className="text-xl font-bold text-black dark:text-white">{edu.degree}</h3>
                   <h4 className="text-lg text-gray-700 dark:text-gray-300 mb-3">{edu.institution}</h4>
                   <p className="text-gray-600 dark:text-gray-400">{edu.description}</p>
@@ -444,3 +462,6 @@ export default function AboutPage() {
     </main>
   )
 }
+
+
+
