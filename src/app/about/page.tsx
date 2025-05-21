@@ -18,33 +18,25 @@ export default function AboutPage() {
 
 
   const fetchData = useCallback(async () => {
-  
-         
-      try {
-        const data = await getalldata("des", undefined,"/course/get-all-courses"); 
-        const result = await getalldata("des", undefined,"/education//get-all-educations"); 
-         if(!data) {
-            toast.error(  "Something is wrong")
-         }
-         if(!result){
-           toast.error(  "Something is wrong")
-         }
-         setcourse(data?.reulst);
-         seteducation(result?.reulst)
-      } catch (error) {
-        toast.error(  (error as Error).message || "Something is wrong")
-        
+    try {
+      const data = await getalldata("des", undefined, "/course/get-all-courses");
+      const result = await getalldata("des", undefined, "/education/get-all-educations");
+
+      if (!data || !result) {
+        toast.error("Something is wrong");
+        return;
       }
-    },[])
-  
 
-  
-    useEffect(() => {
-  
-      fetchData();
-  
-    }, [fetchData]); 
+      setcourse(data?.reulst || []);
+      seteducation(result?.reulst || []);
+    } catch (error) {
+      toast.error((error as Error).message || "Something is wrong");
+    }
+  }, []);
 
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
 
   const skills = [
